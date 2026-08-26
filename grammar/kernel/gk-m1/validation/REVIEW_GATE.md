@@ -6,12 +6,15 @@ The human operator accepted all seven seed annotations on `2026-08-26T04:09:45Z`
 
 This approval does **not** validate a cross-folio alignment, recurring grammar, procedure, manuscript intent, or meaning.
 
-## Remaining merge conditions
+## Engineering gate — PASSED
 
-Before GK-M1 is merged as a completed manuscript-binding milestone:
+- post-validation deterministic regression suite: **14/14 pass**
+- repeatable GitHub Actions verification: **PASS**
+- SHA-256 milestone/provenance manifest: **refreshed**
+- semantic-leakage and unvalidated-binding guards: **PASS**
 
-1. post-validation deterministic regression tests must pass in repeatable CI;
-2. milestone/provenance hashes must be refreshed;
-3. documentation must continue to state that relation/grammar claims require separate Search Sessions and measurements.
+## GK-M1 merge state
 
-A future manuscript-bound relation must be predeclared in a Search Session before it is measured or emitted as an Alignment Candidate.
+The GK-M1 manuscript-binding milestone has satisfied its merge gate.
+
+A future manuscript-bound relation remains a separate experiment. It must be predeclared in a Search Session before it is measured or emitted as an Alignment Candidate.
