@@ -1,0 +1,70 @@
+{
+  "event_id": "EX-GRAMMAR-001-E1",
+  "event_type": "measured_relation",
+  "search_session_id": "EX-GRAMMAR-001",
+  "source_refs": [
+    "VM.f2v"
+  ],
+  "actor": {
+    "entity_id": "VM.f2v.upper_stem_axis",
+    "primitive_type": "STEM",
+    "annotation_status": "human_validated"
+  },
+  "operation": "POINT",
+  "target": {
+    "entity_id": "VM.f2v.central_y",
+    "primitive_type": "Y",
+    "annotation_status": "human_validated"
+  },
+  "transform": {
+    "mode": "identity_only",
+    "translation": [0.0, 0.0],
+    "uniform_scale": 1.0,
+    "rotation_deg": 0.0,
+    "flip_h": false,
+    "flip_v": false,
+    "warp": false
+  },
+  "measurements": {
+    "angular_deviation_deg": 0.45282563142733206,
+    "target_distance": 0.0016970073678139327,
+    "tolerance": 0.03
+  },
+  "state": {
+    "before": null,
+    "after": null,
+    "transition_claim": null,
+    "note": "EX-GRAMMAR-001 measures a geometric relation only; no world-state consequence is asserted."
+  },
+  "epistemic_entries": [
+    {
+      "class": "measurement",
+      "claim": "The preregistered 2v upper-stem axis points toward the validated 2v central-Y landmark with the recorded deterministic geometric residuals."
+    },
+    {
+      "class": "inference",
+      "claim": null
+    },
+    {
+      "class": "interpretation",
+      "claim": null
+    },
+    {
+      "class": "speculation",
+      "claim": null
+    }
+  ],
+  "runtime_contract": {
+    "vr": "Render the actor axis, target landmark, and measurement readout without semantic labels.",
+    "if": "Preserve the event unchanged. IF may describe the measured POINT relation, but must not invent a state consequence or semantic function."
+  },
+  "selected_case_pipeline_only": true,
+  "correspondence_claim": null,
+  "provenance": {
+    "result_ref": "EX-GRAMMAR-001-R1",
+    "result_file": "experiments/EX-GRAMMAR-001/result.json",
+    "github_actions_run_id": 32929779944,
+    "parent_milestone": "GK-M1",
+    "parent_merge_commit": "4f40a63d96b49e80bd6ea2ea468eed180bdcdabf"
+  }
+}
