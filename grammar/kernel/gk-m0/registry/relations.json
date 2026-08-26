@@ -1,0 +1,44 @@
+{
+  "registry_id": "voxis.grammar.relations",
+  "version": "0.1.0",
+  "status": "seed",
+  "relations": [
+    {
+      "relation_id": "ALIGN",
+      "name": "Align",
+      "epistemic_default": "measurement",
+      "description": "Compare declared axes, landmarks, or regions for alignment under a recorded transform.",
+      "expected_measurements": ["axis_angle_error_deg", "landmark_residual", "tolerance"],
+      "warning": "Alignment is geometric only and does not imply correspondence or function."
+    },
+    {
+      "relation_id": "POINT",
+      "name": "Point",
+      "epistemic_default": "measurement",
+      "description": "Test whether a declared directed axis or ray approaches a declared target.",
+      "expected_measurements": ["angular_deviation_deg", "target_distance", "tolerance"]
+    },
+    {
+      "relation_id": "OVERLAP",
+      "name": "Overlap",
+      "epistemic_default": "measurement",
+      "description": "Measure shared projected area between two declared regions under a recorded transform.",
+      "expected_measurements": ["intersection_area", "actor_overlap_fraction", "target_overlap_fraction"]
+    },
+    {
+      "relation_id": "COVER",
+      "name": "Cover",
+      "epistemic_default": "measurement",
+      "description": "Directional overlap in which an actor region is positioned in front of a target region in a declared layer/depth ordering.",
+      "expected_measurements": ["target_covered_fraction", "layer_order", "depth_separation"],
+      "warning": "Cover is spatial/occlusion language. Meanings such as earth, concealment, or protection are separate interpretations."
+    },
+    {
+      "relation_id": "TERMINATE",
+      "name": "Terminate",
+      "epistemic_default": "measurement",
+      "description": "Measure whether a declared line/stem/axis endpoint ends at or near a declared target.",
+      "expected_measurements": ["endpoint_distance", "tolerance"]
+    }
+  ]
+}
