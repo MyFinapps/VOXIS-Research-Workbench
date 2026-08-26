@@ -35,9 +35,11 @@ def load_binding():
 
 def test_binding_status_boundary():
     payload = load_binding()
-    assert payload["status"] == "proposed_pending_human_validation"
+    assert payload["status"] == "human_validated"
+    assert payload["validation"]["decision"] == "all_seven_approved"
     for entity in payload["entities"]:
-        assert entity["annotation_status"] == "proposed_pending_human_validation"
+        assert entity["annotation_status"] == "human_validated"
+        assert entity["validation_decision"] == "accept"
     assert {d["primitive_type"] for d in payload["deferred_bindings"]} == {"DENSE_FIELD", "GLYPH_CLUSTER"}
 
 
