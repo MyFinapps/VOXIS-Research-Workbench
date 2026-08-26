@@ -35,24 +35,8 @@ jobs:
         run: python grammar/kernel/gk-m1/tests/test_measurements.py
       - name: Run record-emitter tests
         run: python grammar/kernel/gk-m1/tests/test_records.py
-      - name: Print GK-M1 manifest hashes
+      - name: Verify GK-M1 milestone manifest
         shell: bash
         run: |
           cd grammar/kernel/gk-m1
-          sha256sum \
-            PROVENANCE.md \
-            README.md \
-            STATUS.md \
-            TEST_RESULTS.txt \
-            adapters/shared_event_contract.md \
-            bindings/voynich_2r_2v_3r_gk_m1.json \
-            examples/README.md \
-            measurement/__init__.py \
-            measurement/geometry.py \
-            records/__init__.py \
-            records/emitters.py \
-            tests/test_measurements.py \
-            tests/test_records.py \
-            validation/HUMAN_VALIDATION.md \
-            validation/PR_CHECKLIST.md \
-            validation/REVIEW_GATE.md
+          sha256sum -c MANIFEST.sha256
