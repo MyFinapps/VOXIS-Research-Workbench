@@ -1,0 +1,31 @@
+name: GK-M1 deterministic tests
+
+on:
+  push:
+    branches:
+      - gk-m1-manuscript-bindings
+    paths:
+      - 'grammar/kernel/gk-m1/**'
+      - '.github/workflows/gk-m1-tests.yml'
+  pull_request:
+    paths:
+      - 'grammar/kernel/gk-m1/**'
+      - '.github/workflows/gk-m1-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  gk-m1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run geometry and binding tests
+        run: python grammar/kernel/gk-m1/tests/test_measurements.py
+      - name: Run record-emitter tests
+        run: python grammar/kernel/gk-m1/tests/test_records.py
