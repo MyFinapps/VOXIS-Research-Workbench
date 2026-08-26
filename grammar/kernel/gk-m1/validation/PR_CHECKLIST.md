@@ -9,9 +9,13 @@
 - [x] Unvalidated primitive bindings are blocked from Alignment Candidate emission
 - [x] 14-test deterministic regression suite passes after validation
 - [x] Semantic leakage guard test passes
-- [x] Repeatable GitHub Actions CI is installed and post-validation run passed
-- [ ] Validated milestone hashes refreshed
-- [ ] First manuscript-bound Search Session is predeclared before relation measurement
-- [ ] Manuscript-bound example(s) added only from that recorded Search Session
+- [x] Repeatable GitHub Actions CI is installed and final verification run passed
+- [x] Validated milestone SHA-256 manifest refreshed
+- [x] Documentation preserves the observation/measurement/inference/interpretation boundary
+
+## Next experimental gate — not a GK-M1 merge blocker
+
+- [ ] Predeclare the first manuscript-bound Search Session before relation measurement
+- [ ] Add manuscript-bound relation example(s) only from that recorded Search Session
 
 Human validation confirms annotation adequacy only; it does not establish correspondence, grammar, procedure, intent, or meaning.
