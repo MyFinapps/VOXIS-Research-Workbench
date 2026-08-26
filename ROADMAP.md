@@ -10,10 +10,11 @@
 ## In progress — GK-M1
 
 - [ ] human-validated 2r/2v/3r primitive bindings
-  - assistant-proposed source-pixel/normalized coordinates are now recorded on the GK-M1 branch
+  - assistant-proposed source-pixel/normalized coordinates are recorded on the GK-M1 branch
   - human accept/adjust/reject validation remains required before promotion
 - [x] deterministic relation measurement functions
-- [ ] reusable Observation / Search Session / Alignment record emitters
+- [x] reusable Observation / Search Session / Alignment Candidate record emitters
+  - Alignment Candidate emission rejects unvalidated primitive bindings
 - [x] shared runtime contract for VR and Veyu'lithra IF
 
 ## Then — P003 Grammar Mode First Light
