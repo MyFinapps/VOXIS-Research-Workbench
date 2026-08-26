@@ -4,12 +4,13 @@ GK-M1 advances the VOXIS Grammar Kernel from synthetic-only behavior toward repr
 
 ## Scope
 
-GK-M1 does four things:
+GK-M1 does five things:
 
 1. defines a reproducible source-image coordinate frame for Voynich folios 2r, 2v, and 3r;
 2. records a small set of **assistant-proposed, human-validation-pending** primitive geometries;
 3. implements deterministic geometry measurements for the seed relations `ALIGN`, `POINT`, `OVERLAP`, `COVER`, and `TERMINATE`;
-4. keeps the same canonical event compatible with both VR and Veyu'lithra IF adapters without adding semantic interpretation.
+4. provides provenance-preserving Observation, Search Session, and Alignment Candidate emitters with an explicit validation gate;
+5. keeps the same canonical event compatible with both VR and Veyu'lithra IF adapters without adding semantic interpretation.
 
 ## Important status boundary
 
@@ -45,6 +46,10 @@ First pass intentionally stays small:
 ## Measurement rule
 
 Measurements operate on geometry **after an explicit recorded planar transform**. Source-normalized geometry is never silently reinterpreted as a cross-folio alignment.
+
+## Record emission rule
+
+Observation Records preserve exact operator wording. Search Sessions predeclare source scope, primitives, relations, and allowed transforms. Alignment Candidate emission rejects any primitive that has not been promoted to `human_validated` or `measured`, and always leaves `correspondence_claim` and `interpretation` null by default.
 
 ## Promotion rule
 
