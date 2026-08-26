@@ -3,7 +3,9 @@
 - [x] Source raster identity, dimensions, xrefs, and hashes recorded
 - [x] All manuscript coordinates remain `proposed_pending_human_validation`
 - [x] Deterministic 2-D transform and relation measurements implemented
-- [x] 10 local deterministic tests pass
+- [x] Observation / Search Session / Alignment Candidate emitters implemented
+- [x] Unvalidated primitive bindings are blocked from Alignment Candidate emission
+- [x] 14 local deterministic tests pass
 - [x] Semantic leakage guard test passes
 - [x] Manuscript-derived relation example intentionally withheld
 - [ ] Human operator validates/adjusts/rejects proposed primitives
