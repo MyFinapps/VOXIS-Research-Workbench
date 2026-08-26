@@ -1,4 +1,8 @@
-import pytest
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 
 from records.freeze import emit_freeze_record
 
@@ -36,6 +40,15 @@ def _context():
     }
 
 
+def _assert_raises(fn, contains):
+    try:
+        fn()
+    except ValueError as exc:
+        assert contains in str(exc), str(exc)
+    else:
+        raise AssertionError(f"expected ValueError containing {contains!r}")
+
+
 def test_freeze_emits_observation_not_evidence():
     record = emit_freeze_record(
         trigger={"type": "keyboard", "raw_input": "FREEZE", "device_ref": None},
@@ -54,26 +67,30 @@ def test_freeze_emits_observation_not_evidence():
 
 
 def test_freeze_requires_source_provenance():
-    with pytest.raises(ValueError, match="source_ref"):
-        emit_freeze_record(
+    _assert_raises(
+        lambda: emit_freeze_record(
             trigger={"type": "ui"},
             capture_context=_context(),
             representation_states=[_representation_state()],
             provenance={},
-        )
+        ),
+        "source_ref",
+    )
 
 
 def test_freeze_requires_representation_state():
-    with pytest.raises(ValueError, match="representation"):
-        emit_freeze_record(
+    _assert_raises(
+        lambda: emit_freeze_record(
             trigger={"type": "ui"},
             capture_context=_context(),
             representation_states=[],
             provenance={"source_refs": ["source.voynich.f2v"]},
-        )
+        ),
+        "representation",
+    )
 
 
-def test_partial_capture_requires_explicit_missing_fields():
+def test_partial_capture_is_explicit():
     record = emit_freeze_record(
         trigger={"type": "physical_log", "raw_input": "manual freeze", "device_ref": None},
         capture_context=_context(),
@@ -88,23 +105,46 @@ def test_partial_capture_requires_explicit_missing_fields():
 
 
 def test_missing_fields_cannot_masquerade_as_full_capture():
-    with pytest.raises(ValueError, match="partial"):
-        emit_freeze_record(
+    _assert_raises(
+        lambda: emit_freeze_record(
             trigger={"type": "ui"},
             capture_context=_context(),
             representation_states=[_representation_state()],
             provenance={"source_refs": ["source.voynich.f2v"]},
             capture_completeness="full",
             missing_fields=["camera_state"],
-        )
+        ),
+        "partial",
+    )
 
 
-def test_measurement_links_must_be_explicitly_classified():
-    with pytest.raises(ValueError, match="measurement_linked"):
-        emit_freeze_record(
+def test_measurement_links_require_explicit_classification():
+    _assert_raises(
+        lambda: emit_freeze_record(
             trigger={"type": "ui"},
             capture_context=_context(),
             representation_states=[_representation_state()],
             provenance={"source_refs": ["source.voynich.f2v"]},
             linked_measurement_ids=["MEAS-001"],
-        )
+        ),
+        "measurement_linked",
+    )
+
+
+def main():
+    tests = [
+        test_freeze_emits_observation_not_evidence,
+        test_freeze_requires_source_provenance,
+        test_freeze_requires_representation_state,
+        test_partial_capture_is_explicit,
+        test_missing_fields_cannot_masquerade_as_full_capture,
+        test_measurement_links_require_explicit_classification,
+    ]
+    for test in tests:
+        test()
+        print(f"PASS {test.__name__}")
+    print(f"PASS all {len(tests)} FREEZE record tests")
+
+
+if __name__ == "__main__":
+    main()
