@@ -1,0 +1,64 @@
+{
+  "event_id": "EX-GRAMMAR-001-E1",
+  "event_type": "measured_relation_invalidated",
+  "status": "invalidated_by_binding_defect",
+  "search_session_id": "EX-GRAMMAR-001",
+  "source_refs": ["VM.f2v"],
+  "actor": {
+    "entity_id": "VM.f2v.upper_stem_axis",
+    "primitive_type": "STEM",
+    "annotation_status_at_run": "human_validated",
+    "later_audit_status": "failed_annotation_adequacy"
+  },
+  "operation": "POINT",
+  "target": {
+    "entity_id": "VM.f2v.central_y",
+    "primitive_type": "Y",
+    "annotation_status_at_run": "human_validated",
+    "later_audit_status": "failed_annotation_adequacy"
+  },
+  "transform": {
+    "mode": "identity_only",
+    "translation": [0.0, 0.0],
+    "uniform_scale": 1.0,
+    "rotation_deg": 0.0,
+    "flip_h": false,
+    "flip_v": false,
+    "warp": false
+  },
+  "measurements": {
+    "angular_deviation_deg": 0.45282563142733206,
+    "target_distance": 0.0016970073678139327,
+    "tolerance": 0.03
+  },
+  "state": {
+    "before": null,
+    "after": null,
+    "transition_claim": null,
+    "note": "Historical computation retained for provenance. Evidentiary use is prohibited because the source primitive annotations later failed geometry audit."
+  },
+  "epistemic_entries": [
+    {
+      "class": "measurement",
+      "claim": "A deterministic computation was performed on the then-recorded coordinates; those coordinates later failed annotation-adequacy audit, so this measurement is invalid for geometric inference."
+    },
+    {"class": "inference", "claim": null},
+    {"class": "interpretation", "claim": null},
+    {"class": "speculation", "claim": null}
+  ],
+  "runtime_contract": {
+    "vr": "May render only as an invalidated historical measurement with a visible defect flag.",
+    "if": "Must not use this event as a world-state input or narrative consequence. It may appear only as provenance/history."
+  },
+  "selected_case_pipeline_only": true,
+  "correspondence_claim": null,
+  "evidentiary_use": "prohibited",
+  "provenance": {
+    "result_ref": "EX-GRAMMAR-001-R1",
+    "result_file": "experiments/EX-GRAMMAR-001/result.json",
+    "github_actions_run_id": 32929779944,
+    "parent_milestone": "GK-M1",
+    "parent_merge_commit": "4f40a63d96b49e80bd6ea2ea468eed180bdcdabf",
+    "invalidation_discovery": "EX-GRAMMAR-002A Stage A"
+  }
+}

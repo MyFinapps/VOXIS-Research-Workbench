@@ -1,0 +1,55 @@
+{
+  "record_type": "measurement_result",
+  "result_id": "EX-GRAMMAR-001-R1",
+  "search_session_id": "EX-GRAMMAR-001",
+  "status": "invalidated_by_binding_defect",
+  "source_refs": ["VM.f2v"],
+  "actor": "VM.f2v.upper_stem_axis",
+  "operation": "POINT",
+  "target": "VM.f2v.central_y",
+  "transform": {
+    "flip_h": false,
+    "flip_v": false,
+    "mode": "identity_only",
+    "nonuniform_scale": false,
+    "pivot": [0.0, 0.0],
+    "rotation_deg": 0.0,
+    "translation": [0.0, 0.0],
+    "uniform_scale": 1.0,
+    "warp": false
+  },
+  "measurements": {
+    "angular_deviation_deg": 0.45282563142733206,
+    "target_distance": 0.0016970073678139327,
+    "tolerance": 0.03
+  },
+  "measurement_method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+  "epistemic_class": "measurement",
+  "selected_case_pipeline_only": true,
+  "correspondence_claim": null,
+  "interpretation": null,
+  "inference": null,
+  "evidentiary_use": "prohibited",
+  "invalidation": {
+    "discovered_during": "EX-GRAMMAR-002A Stage A candidate inventory",
+    "reason": "Close source-raster inspection showed that both the stored VM.f2v.central_y point and VM.f2v.upper_stem_axis segment are visibly offset from the intended botanical structures. The deterministic computation remains reproducible, but its input geometry is not accepted as an adequate representation of the declared primitives.",
+    "policy": "retain_not_delete",
+    "replacement_rule": "requires corrected human-reviewed bindings and a new result identifier"
+  },
+  "limitations": [
+    "The stem/Y relationship was visually noticed before preregistration; this was a hypothesis-informed selected case.",
+    "The numerical result is invalid for evidentiary use because the underlying primitive coordinates failed later annotation audit.",
+    "No manuscript-wide grammar, procedure, function, intent, or meaning is inferred."
+  ],
+  "provenance": {
+    "search_session_sha256": "8ae4069a4ef87dacd252daa74a48fc9a293ae49a09fac1d26418a6eaee9505a4",
+    "binding_sha256": "aa085ae350b4cc1b106d376ce6b23f72054a853bc9c9f2a2ebbd96aa48d792a4",
+    "parent_milestone": "GK-M1",
+    "parent_merge_commit": "4f40a63d96b49e80bd6ea2ea468eed180bdcdabf",
+    "measurement_commit": "6dc1ecb74534a8ea7a96e399f7cb331bc056e43c",
+    "github_actions_run_id": 32929779944,
+    "github_actions_job_id": 98059673059,
+    "github_actions_conclusion": "success",
+    "invalidation_discovery": "EX-GRAMMAR-002A Stage A"
+  }
+}
