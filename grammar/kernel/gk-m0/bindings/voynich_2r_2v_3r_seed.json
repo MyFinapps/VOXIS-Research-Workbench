@@ -1,0 +1,51 @@
+{
+  "binding_id": "voxis.grammar.voynich.2r_2v_3r.seed",
+  "version": "0.1.0",
+  "status": "provisional_unassessed",
+  "source": {
+    "file": "Manuscript-voynich-manuscript-v1.0-3.pdf",
+    "folios": {
+      "2r": {"pdf_page": 5, "image_id": "1006078"},
+      "2v": {"pdf_page": 6, "image_id": "1006079"},
+      "3r": {"pdf_page": 7, "image_id": "1006080"}
+    }
+  },
+  "candidate_entities": [
+    {
+      "entity_id": "VM.f2r.root",
+      "primitive_type": "ROOT",
+      "source_ref": "VM.f2r",
+      "geometry_ref": null,
+      "annotation_status": "operator_defined_candidate",
+      "note": "Candidate slot only. Human validation/coordinates required before measurement."
+    },
+    {
+      "entity_id": "VM.f2v.central_y",
+      "primitive_type": "Y",
+      "source_ref": "VM.f2v",
+      "geometry_ref": null,
+      "annotation_status": "operator_defined_candidate",
+      "note": "Candidate Y-like bifurcation. Human validation/coordinates required before measurement."
+    },
+    {
+      "entity_id": "VM.f2r.stem",
+      "primitive_type": "STEM",
+      "source_ref": "VM.f2r",
+      "geometry_ref": null,
+      "annotation_status": "operator_defined_candidate"
+    },
+    {
+      "entity_id": "VM.f3r.root_region",
+      "primitive_type": "ROOT",
+      "source_ref": "VM.f3r",
+      "geometry_ref": null,
+      "annotation_status": "operator_defined_candidate"
+    }
+  ],
+  "epistemic_boundary": {
+    "observation": "2r/2v/3r have been used in manual and documentary overlay exploration.",
+    "measurement": "This binding file contains no new measured primitive coordinates or cross-folio grammar relations.",
+    "interpretation": "Terms such as earth/dirt, transmitter, receiver, injection, and receptacle are excluded from the seed grammar registry and belong in optional interpretation records.",
+    "speculation": "Intentional manuscript-wide procedural grammar remains unestablished."
+  }
+}
