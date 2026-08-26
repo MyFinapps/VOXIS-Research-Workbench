@@ -1,0 +1,32 @@
+{
+  "registry_id": "voxis.grammar.primitives",
+  "version": "0.1.0",
+  "status": "seed",
+  "primitives": [
+    {
+      "primitive_id": "ROOT",
+      "name": "Root",
+      "definition": "Operator-declared root or root-like structural region. Morphological label only; no semantic function implied."
+    },
+    {
+      "primitive_id": "STEM",
+      "name": "Stem",
+      "definition": "Operator-declared elongated connecting axis or stem-like structure. Morphological label only."
+    },
+    {
+      "primitive_id": "Y",
+      "name": "Y junction",
+      "definition": "Operator-declared bifurcating Y-like junction or split. Geometric/morphological label only."
+    },
+    {
+      "primitive_id": "DENSE_FIELD",
+      "name": "Dense field",
+      "definition": "Operator-declared region with comparatively dense repeated marks, strokes, stems, or other visual elements. Requires an explicit density method before measurement claims."
+    },
+    {
+      "primitive_id": "GLYPH_CLUSTER",
+      "name": "Glyph cluster",
+      "definition": "Operator-declared contiguous or relational group of manuscript glyphs. Cluster boundary and selection rule must be recorded."
+    }
+  ]
+}
