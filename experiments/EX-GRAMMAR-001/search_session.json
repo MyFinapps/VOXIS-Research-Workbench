@@ -1,0 +1,61 @@
+{
+  "record_type": "search_session_definition",
+  "search_session_id": "EX-GRAMMAR-001",
+  "title": "STEM -> POINT -> Y — 2v Pipeline First Light",
+  "status": "predeclared_not_measured",
+  "predeclared_at": "2026-08-26T04:18:00Z",
+  "purpose": "instrument_pipeline_validation",
+  "epistemic_class": "measurement_plan",
+  "source_refs": [
+    "VM.f2v"
+  ],
+  "binding_ref": {
+    "binding_id": "voxis.grammar.voynich.2r_2v_3r.gk_m1",
+    "version": "0.2.1",
+    "required_status": "human_validated"
+  },
+  "eligible_primitives": [
+    "VM.f2v.upper_stem_axis",
+    "VM.f2v.central_y"
+  ],
+  "actor": "VM.f2v.upper_stem_axis",
+  "operation": "POINT",
+  "target": "VM.f2v.central_y",
+  "allowed_transform": {
+    "mode": "identity_only",
+    "pivot": [0.0, 0.0],
+    "translation": [0.0, 0.0],
+    "uniform_scale": 1.0,
+    "rotation_deg": 0.0,
+    "flip_h": false,
+    "flip_v": false,
+    "nonuniform_scale": false,
+    "warp": false
+  },
+  "measurement_method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+  "predeclared_context": {
+    "tolerance_normalized": 0.03
+  },
+  "outputs_to_record": [
+    "angular_deviation_deg",
+    "target_distance",
+    "tolerance"
+  ],
+  "decision_rule": "Record the deterministic measurement values only. Do not convert this selected-case pipeline check into evidence for recurrence, correspondence, manuscript grammar, function, intent, or meaning.",
+  "selection_bias": {
+    "classification": "hypothesis_informed_selected_case",
+    "note": "The 2v stem/Y relation was visually noticed before this Search Session was preregistered. EX-GRAMMAR-001 is therefore a pipeline-validation experiment, not a discovery-neutral statistical test."
+  },
+  "controls": {
+    "status": "not_applicable_to_pipeline_first_light",
+    "note": "Controls/counterexamples are required before any inference about recurrence or manuscript-wide grammar."
+  },
+  "correspondence_claim": null,
+  "interpretation": null,
+  "provenance": {
+    "parent_milestone": "GK-M1",
+    "parent_merge_commit": "4f40a63d96b49e80bd6ea2ea468eed180bdcdabf",
+    "human_validation_required": true,
+    "human_validation_satisfied": true
+  }
+}
