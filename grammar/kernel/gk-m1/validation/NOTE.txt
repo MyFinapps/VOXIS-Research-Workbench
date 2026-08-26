@@ -1,1 +1,0 @@
-This branch intentionally requires human validation before manuscript bindings can be promoted.
