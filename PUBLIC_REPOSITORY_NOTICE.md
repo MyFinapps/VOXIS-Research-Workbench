@@ -1,19 +1,28 @@
 # Public Repository Notice
 
-This repository is temporarily public.
+This repository is currently public by operator requirement.
 
-Accordingly, this baseline is intentionally limited to public-safe engineering artifacts: source code, schemas, registries, experiment definitions, provenance metadata, tests, and documentation.
+## Public-safe scope
 
-The following are intentionally not mirrored here unless separately approved:
+Allowed here:
 
-- private correspondence or personal data
-- credentials, secrets, or machine-specific configuration
-- raw/private research photography
-- full manuscript/source PDFs
-- large videos and rendered media
-- unpublished heavyweight 3D assets
-- local working caches/build outputs
+- source code;
+- schemas and registries;
+- deterministic tests and CI configuration;
+- experiment definitions and non-sensitive results;
+- provenance metadata and hashes;
+- small engineering fixtures whose publication is intentional.
 
-Where an experiment depends on a heavyweight or separately hosted asset, the repository should preserve its identity, provenance, and hash rather than silently substituting a different artifact.
+Not stored here by default:
 
-Research status remains explicit: observations, measurements, inferences, interpretations, and speculation are not interchangeable. Geometric fit is a research aid, not proof of manuscript correspondence.
+- full manuscript PDFs or other heavyweight source documents;
+- high-resolution/raw research imagery unless explicitly approved for publication;
+- private photographs, correspondence, or personal information;
+- credentials, secrets, machine-specific sensitive configuration, or access tokens;
+- large videos, Unity/Blender builds, or other binary research archives better kept in the local/Dropbox evidence store.
+
+## Research boundary
+
+Public visibility does not change VOXIS evidentiary standards. Human validation of an annotation confirms only that the marked geometry is an adequate operational landmark/region. It does not establish manuscript correspondence, function, grammar, intent, or meaning.
+
+**Geometry first → measurement → inference → interpretation → speculation.**

@@ -2,7 +2,7 @@
 
 Versioned engineering spine for the VOXIS Alignment Engine, Voynich VR Lab, Grammar Kernel, experiment definitions, and provenance tooling.
 
-> **Public staging mode:** This repository is temporarily public. The engineering baseline excludes raw/private evidence and heavyweight research media; see `PUBLIC_REPOSITORY_NOTICE.md`.
+> **Public staging mode:** This repository is currently public. The engineering baseline excludes raw/private evidence and heavyweight research media; see `PUBLIC_REPOSITORY_NOTICE.md`.
 
 > **Research rule:** Geometry first. Measurement second. Meaning last.
 >
@@ -18,7 +18,7 @@ It is **not** the master archive for heavyweight source evidence. High-resolutio
 
 | Area | Baseline | Status |
 |---|---|---|
-| Grammar | `grammar/kernel/gk-m0` | synthetic tests passed; manuscript bindings provisional |
+| Grammar | `grammar/kernel/gk-m1` | 7 seed annotations human-validated; 14-test suite + SHA-256 manifest verified in CI; relation claims remain unestablished |
 | WebXR | `vr/webxr/p002-dual-folio` | desktop/browser surface QA complete; Quest immersive interaction requires validation |
 | Unity VR | `vr/unity/p001-enter-the-folio` | statically assembled; Unity/Quest runtime validation still required |
 | Geometry Registry | `registries/kepler` | seed registry; Voynich crosswalk unassessed |
@@ -29,6 +29,7 @@ It is **not** the master archive for heavyweight source evidence. High-resolutio
 grammar/
   kernel/
     gk-m0/                 Shared canonical grammar/event model
+    gk-m1/                 Human-validated seed primitives + deterministic measurements
 vr/
   webxr/
     p002-dual-folio/       Quest-browser Dual Folio First Contact
@@ -64,8 +65,8 @@ Interpretation may reference measured geometry; it may never overwrite it.
 6. Commit changes with a clear milestone/experiment reference.
 7. Tag frozen milestones only after validation status is explicit.
 
-## Next milestone
+## Next experimental milestone
 
-**GK-M1 — Bind the Grammar to the Manuscript**
+**EX-GRAMMAR-001 / P003 — Grammar Mode First Light**
 
-Human-validate selected primitive coordinates/masks for 2r, 2v, and 3r; implement deterministic measurement functions for the seed relations; then feed the same canonical events into Grammar Mode VR and Veyu'lithra IF.
+Predeclare the first manuscript-bound Search Session before measuring any candidate relation. The same canonical event model will then feed measured geometry into both Grammar Mode VR and Veyu'lithra IF while interpretation remains a separate toggleable layer.
