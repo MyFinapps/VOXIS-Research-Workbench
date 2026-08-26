@@ -1,0 +1,33 @@
+name: EX-GRAMMAR-001 measurement
+
+on:
+  push:
+    branches:
+      - ex-grammar-001-stem-point-y
+    paths:
+      - 'experiments/EX-GRAMMAR-001/**'
+      - '.github/workflows/ex-grammar-001.yml'
+  pull_request:
+    paths:
+      - 'experiments/EX-GRAMMAR-001/**'
+      - '.github/workflows/ex-grammar-001.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Re-run GK-M1 guards
+        run: |
+          python grammar/kernel/gk-m1/tests/test_measurements.py
+          python grammar/kernel/gk-m1/tests/test_records.py
+      - name: Measure preregistered EX-GRAMMAR-001
+        run: python experiments/EX-GRAMMAR-001/run.py
