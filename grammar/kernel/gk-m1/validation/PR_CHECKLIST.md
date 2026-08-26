@@ -7,10 +7,10 @@
 - [x] Deterministic 2-D transform and relation measurements implemented
 - [x] Observation / Search Session / Alignment Candidate emitters implemented
 - [x] Unvalidated primitive bindings are blocked from Alignment Candidate emission
-- [x] Prior 14-test deterministic suite passed
-- [x] Semantic leakage guard test passed
-- [ ] Post-validation regression suite passes in repeatable CI
-- [ ] Validated binding hashes refreshed
+- [x] 14-test deterministic regression suite passes after validation
+- [x] Semantic leakage guard test passes
+- [x] Repeatable GitHub Actions CI is installed and post-validation run passed
+- [ ] Validated milestone hashes refreshed
 - [ ] First manuscript-bound Search Session is predeclared before relation measurement
 - [ ] Manuscript-bound example(s) added only from that recorded Search Session
 
