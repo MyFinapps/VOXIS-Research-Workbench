@@ -9,3 +9,8 @@ PASS test_cover_is_directional_overlap_only
 PASS test_terminate
 PASS test_no_semantic_outputs
 PASS all 10 GK-M1 tests
+PASS test_observation_preserves_exact_wording
+PASS test_search_session_predeclares_scope
+PASS test_alignment_candidate_rejects_unvalidated_binding
+PASS test_alignment_candidate_contains_no_correspondence_claim
+PASS all 4 GK-M1 record tests
