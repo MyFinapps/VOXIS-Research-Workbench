@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://voxis.local/schemas/records/freeze_record.schema.json",
+  "title": "VOXIS FREEZE Record",
+  "description": "Immutable capture of a candidate research state at the moment an operator invokes FREEZE. A FREEZE record preserves an observation candidate; it does not constitute measurement, evidence, correspondence proof, or interpretation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "freeze_id",
+    "created_at",
+    "epistemic_class",
+    "evidence_status",
+    "measurement_status",
+    "capture_completeness",
+    "trigger",
+    "capture_context",
+    "representation_states",
+    "provenance"
+  ],
+  "properties": {
+    "record_type": { "const": "freeze_state" },
+    "schema_version": { "const": "0.1.0" },
+    "freeze_id": {
+      "type": "string",
+      "pattern": "^FREEZE-[A-Za-z0-9._:-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "operator": {
+      "type": ["string", "null"]
+    },
+    "parent_search_session_id": {
+      "type": ["string", "null"]
+    },
+    "candidate_observation_id": {
+      "type": ["string", "null"],
+      "description": "Optional linked Observation Record. FREEZE may exist before a formal Observation Record is emitted."
+    },
+    "epistemic_class": { "const": "observation" },
+    "evidence_status": { "const": "not_evidence" },
+    "measurement_status": {
+      "enum": ["unmeasured", "measurement_linked"]
+    },
+    "capture_completeness": {
+      "enum": ["full", "partial"]
+    },
+    "missing_fields": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "default": []
+    },
+    "operator_note_exact": {
+      "type": ["string", "null"],
+      "description": "Exact operator wording when available. Do not silently rewrite as interpretation."
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": ["voice", "controller", "keyboard", "ui", "api", "physical_log", "other"]
+        },
+        "raw_input": { "type": ["string", "null"] },
+        "device_ref": { "type": ["string", "null"] }
+      }
+    },
+    "capture_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime", "mode_before", "mode_after", "coordinate_space_ref"],
+      "properties": {
+        "runtime": {
+          "enum": ["desktop", "webxr", "unity_vr", "physical", "headless", "other"]
+        },
+        "runtime_version": { "type": ["string", "null"] },
+        "mode_before": {
+          "enum": ["discovery", "evidence", "review", "control_test", "other"]
+        },
+        "mode_after": {
+          "enum": ["discovery", "evidence", "review", "control_test", "candidate_observation", "other"]
+        },
+        "coordinate_space_ref": { "type": "string", "minLength": 1 },
+        "units": { "type": ["string", "null"] },
+        "camera_state": { "$ref": "#/$defs/pose" },
+        "controller_states": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/controllerState" },
+          "default": []
+        }
+      }
+    },
+    "representation_states": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/representationState" }
+    },
+    "active_features": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/featureRef" },
+      "default": []
+    },
+    "media_buffer_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mediaRef" },
+      "default": []
+    },
+    "linked_measurement_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "default": []
+    },
+    "content_hash": {
+      "type": ["string", "null"],
+      "description": "Optional hash of canonical serialized record after capture."
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source_refs"],
+      "properties": {
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "representation_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "software_build_ref": { "type": ["string", "null"] },
+        "device_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "quaternion": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "pose": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "coordinate_space_ref": { "type": "string" },
+        "translation": { "$ref": "#/$defs/vector3" },
+        "rotation_quaternion_xyzw": { "$ref": "#/$defs/quaternion" },
+        "scale": { "$ref": "#/$defs/vector3" }
+      }
+    },
+    "controllerState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller_ref", "pose"],
+      "properties": {
+        "controller_ref": { "type": "string" },
+        "pose": { "$ref": "#/$defs/pose" },
+        "buttons": {
+          "type": "object",
+          "additionalProperties": { "type": ["number", "boolean"] }
+        }
+      }
+    },
+    "representationState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation_ref",
+        "source_ref",
+        "stack_index",
+        "visible",
+        "opacity",
+        "transform"
+      ],
+      "properties": {
+        "representation_ref": { "type": "string", "minLength": 1 },
+        "source_ref": { "type": "string", "minLength": 1 },
+        "stack_index": { "type": "integer" },
+        "visible": { "type": "boolean" },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "transform": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["coordinate_space_ref", "translation", "rotation_quaternion_xyzw", "scale", "pivot"],
+          "properties": {
+            "coordinate_space_ref": { "type": "string", "minLength": 1 },
+            "units": { "type": ["string", "null"] },
+            "translation": { "$ref": "#/$defs/vector3" },
+            "rotation_quaternion_xyzw": { "$ref": "#/$defs/quaternion" },
+            "scale": { "$ref": "#/$defs/vector3" },
+            "pivot": { "$ref": "#/$defs/vector3" },
+            "pivot_rule": { "type": ["string", "null"] },
+            "reflection": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "x": { "type": "boolean", "default": false },
+                "y": { "type": "boolean", "default": false },
+                "z": { "type": "boolean", "default": false }
+              }
+            },
+            "native_transform": {
+              "type": ["object", "null"],
+              "additionalProperties": true,
+              "description": "Runtime-native transform preserved losslessly when available."
+            }
+          }
+        }
+      }
+    },
+    "featureRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feature_ref", "feature_type"],
+      "properties": {
+        "feature_ref": { "type": "string" },
+        "feature_type": {
+          "enum": ["landmark", "anchor", "pivot", "glyph", "glyph_cluster", "stem", "root", "leaf", "pipe", "region", "other"]
+        },
+        "representation_ref": { "type": ["string", "null"] },
+        "operator_label": { "type": ["string", "null"] }
+      }
+    },
+    "mediaRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_ref", "relation"],
+      "properties": {
+        "media_ref": { "type": "string" },
+        "relation": {
+          "enum": ["pre_freeze_buffer", "freeze_frame", "screen_capture", "operator_audio", "external_video", "other"]
+        },
+        "start_offset_seconds": { "type": ["number", "null"] },
+        "end_offset_seconds": { "type": ["number", "null"] }
+      }
+    }
+  }
+}
