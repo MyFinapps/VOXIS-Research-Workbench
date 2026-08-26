@@ -7,8 +7,8 @@
 - Deterministic relation measurement engine: **implemented**
 - Observation / Search Session / Alignment Candidate emitters: **implemented**
 - Unvalidated-binding rejection gate: **implemented and tested**
-- Prior deterministic suite: **14/14 pass**
-- Post-validation regression run: **pending CI rerun**
+- Deterministic regression suite: **14/14 pass**
+- Post-validation GitHub Actions run: **PASS** (`32929365663`)
 - Cross-folio alignment claim: **none**
 - Manuscript-wide grammar claim: **none**
 - Interpretation claim: **none**
