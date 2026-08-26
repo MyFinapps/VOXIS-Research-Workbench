@@ -7,7 +7,7 @@
 - P002-WXR-001 Dual Folio First Contact
 - Kepler geometry registry v0.1
 
-## In progress — GK-M1
+## GK-M1 — merge-ready
 
 - [x] human-validated 2r/2v/3r primitive bindings
   - all 7 seed annotations accepted by the human operator
@@ -16,11 +16,14 @@
 - [x] reusable Observation / Search Session / Alignment Candidate record emitters
   - Alignment Candidate emission rejects unvalidated primitive bindings
 - [x] shared runtime contract for VR and Veyu'lithra IF
-- [ ] repeatable post-validation CI regression pass
-- [ ] refresh milestone/provenance hashes after validation
-- [ ] predeclare first manuscript-bound Search Session before relation measurement
+- [x] repeatable post-validation CI regression pass
+- [x] validated SHA-256 milestone/provenance manifest verified in CI
 
-## Then — P003 Grammar Mode First Light
+## Next — EX-GRAMMAR-001 / P003 Grammar Mode First Light
+
+Before any manuscript-bound relation measurement, predeclare the Search Session: eligible folios/primitives, relations, transforms, tolerances, and control/counterexample strategy.
+
+Then:
 
 - selectable primitives
 - live measured relations
