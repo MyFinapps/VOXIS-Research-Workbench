@@ -1,0 +1,11 @@
+PASS test_binding_status_boundary
+PASS test_source_coordinates_roundtrip
+PASS test_transform_point_geometry
+PASS test_align_parallel_segments
+PASS test_axis_undirected
+PASS test_point_relation
+PASS test_overlap_bbox
+PASS test_cover_is_directional_overlap_only
+PASS test_terminate
+PASS test_no_semantic_outputs
+PASS all 10 GK-M1 tests
