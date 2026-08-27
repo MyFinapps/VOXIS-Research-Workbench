@@ -29,6 +29,8 @@ jobs:
           python-version: '3.11'
       - name: Run FREEZE deterministic tests
         run: python workbench/freeze/tests/test_record.py
+      - name: Run desktop FREEZE adapter tests
+        run: python workbench/freeze/desktop_poc/test_adapter.py
       - name: Parse FREEZE JSON schema
         run: python -m json.tool schemas/records/freeze_record.schema.json > /dev/null
       - name: Verify finalized GK-M1 remains untouched
