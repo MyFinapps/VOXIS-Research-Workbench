@@ -67,7 +67,7 @@ def capture_webxr_state(payload, *, created_at=None):
         trigger={"type": trigger_type, "raw_input": "FREEZE", "device_ref": device_hint},
         capture_context={
             "runtime": "webxr",
-            "runtime_version": "VISTA_M0_FIRST_PRESENCE_v0.1.1",
+            "runtime_version": "VISTA_M0_FIRST_PRESENCE_v0.1.2",
             "mode_before": "discovery",
             "mode_after": "candidate_observation",
             "coordinate_space_ref": "VISTA.m0.world",
@@ -80,7 +80,7 @@ def capture_webxr_state(payload, *, created_at=None):
         provenance={
             "source_refs": ["F2R", "F2V"],
             "representation_refs": ["VM.f2r.anchor", "VM.f2v.overlay"],
-            "software_build_ref": "VISTA_M0_FIRST_PRESENCE_v0.1.1",
+            "software_build_ref": "VISTA_M0_FIRST_PRESENCE_v0.1.2",
             "device_refs": [device_hint],
             "research_boundary": "Geometric fit is a research aid, not proof of manuscript correspondence.",
         },
