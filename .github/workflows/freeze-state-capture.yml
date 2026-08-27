@@ -37,6 +37,10 @@ jobs:
         run: python workbench/freeze/desktop_poc/test_adapter.py
       - name: Run VISTA M0 WebXR adapter tests
         run: python workbench/vista/m0/test_adapter.py
+      - name: Run VISTA M1 WebXR adapter tests
+        run: python workbench/vista/m1/test_adapter.py
+      - name: Run VISTA M1 spatial record tests
+        run: python workbench/vista/m1/test_spatial_records.py
       - name: Parse FREEZE JSON schema
         run: python -m json.tool schemas/records/freeze_record.schema.json > /dev/null
       - name: Verify finalized GK-M1 remains untouched
