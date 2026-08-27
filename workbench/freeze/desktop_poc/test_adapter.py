@@ -1,5 +1,9 @@
 from pathlib import Path
+import sys
 import tempfile
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT))
 
 from workbench.freeze.desktop_poc.adapter import capture_desktop_state, persist_immutable, read_frozen
 
