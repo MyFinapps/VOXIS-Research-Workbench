@@ -48,7 +48,7 @@ def test_capture_boundary_and_spatial_context():
     assert record["epistemic_class"] == "observation"
     assert record["evidence_status"] == "not_evidence"
     assert record["measurement_status"] == "unmeasured"
-    assert record["capture_context"]["runtime_version"] == "VISTA_M1_ROSETTE_FLIGHT_v0.3.0"
+    assert record["capture_context"]["runtime_version"] == "VISTA_M1_ROSETTE_FLIGHT_v0.3.1"
     assert record["capture_context"]["coordinate_space_ref"] == "VISTA.m1.world"
     assert record["capture_context"]["transform_mode"] == "rotate"
     assert record["capture_context"]["annotation_tool"] == "tack"
@@ -60,7 +60,7 @@ def test_capture_boundary_and_spatial_context():
     assert len(record["representation_states"]) == 3
     assert record["representation_states"][1]["transform"]["pivot"] == [0.12, -0.18, 0.0]
     assert record["active_features"][0]["feature_ref"] == "ANCHOR-test"
-    assert record["provenance"]["software_build_ref"] == "VISTA_M1_ROSETTE_FLIGHT_v0.3.0"
+    assert record["provenance"]["software_build_ref"] == "VISTA_M1_ROSETTE_FLIGHT_v0.3.1"
 
 
 def test_live_mutation_does_not_change_frozen_record():
