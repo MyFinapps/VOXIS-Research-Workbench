@@ -69,7 +69,7 @@ def capture_webxr_state(payload, *, created_at=None):
         trigger={"type": trigger_type, "raw_input": "FREEZE", "device_ref": device_hint},
         capture_context={
             "runtime": "webxr",
-            "runtime_version": "VISTA_M1_ROSETTE_FLIGHT_v0.3.0",
+            "runtime_version": "VISTA_M1_ROSETTE_FLIGHT_v0.3.1",
             "mode_before": "discovery",
             "mode_after": "candidate_observation",
             "coordinate_space_ref": "VISTA.m1.world",
@@ -88,7 +88,7 @@ def capture_webxr_state(payload, *, created_at=None):
         provenance={
             "source_refs": ["F2R", "F2V", "F3R"],
             "representation_refs": ["VM.f2r.anchor", "VM.f2v.overlay", "VM.f3r.overlay"],
-            "software_build_ref": "VISTA_M1_ROSETTE_FLIGHT_v0.3.0",
+            "software_build_ref": "VISTA_M1_ROSETTE_FLIGHT_v0.3.1",
             "device_refs": [device_hint],
             "research_boundary": "Geometric fit, environment styling, and viewpoint are research aids/context, not proof of manuscript correspondence.",
         },
@@ -118,7 +118,7 @@ def persist_immutable(record, directory):
 def read_frozen(freeze_id, directory):
     if not FREEZE_ID_RE.fullmatch(freeze_id):
         raise ValueError("invalid freeze_id")
-    path = directory / f"{freeze_id}.json"
+    path = Path(directory) / f"{freeze_id}.json"
     if not path.exists():
         raise FileNotFoundError(freeze_id)
     return json.loads(path.read_text(encoding="utf-8"))
