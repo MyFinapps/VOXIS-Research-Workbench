@@ -12,7 +12,8 @@ Close inspection of the original `VM.f2v` source raster showed that the stored 2
 
 - EX-GRAMMAR-001 R1 is retained but marked `invalidated_by_binding_defect`.
 - The event may not be used as evidence or IF state input.
-- EX-GRAMMAR-002A Stage B is blocked pending corrected Stage A geometry and human review.
-- Corrected geometry will be versioned rather than overwriting the original record without trace.
+- Corrected Stage A geometry received human review on 2026-09-02 and was frozen under SHA-256 `735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7`.
+- The canonical binding was patched explicitly as version `0.2.2`, retaining the superseded coordinates and defect provenance.
+- EX-GRAMMAR-002A Stage B subsequently completed against that frozen inventory. Its result does not rehabilitate EX-GRAMMAR-001 R1.
 
 This defect concerns annotation geometry only and does not support either a positive or negative manuscript-grammar claim.

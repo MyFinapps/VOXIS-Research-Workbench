@@ -1,12 +1,12 @@
 {
   "binding_id": "voxis.grammar.voynich.2r_2v_3r.gk_m1",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "status": "human_validated",
   "validation": {
-    "decision": "all_seven_approved",
-    "validated_at": "2026-08-26T04:09:45Z",
+    "decision": "stage_a_f2v_corrections_and_inventory_accepted",
+    "validated_at": "2026-09-02",
     "validator_role": "human_operator",
-    "method": "visual_review_of_GK_M1_validation_pack",
+    "method": "visual_review_of_EX_GRAMMAR_002A_STAGE_A_REVIEW_pack",
     "scope": "Annotation adequacy only. This validation does not confirm cross-folio alignment, manuscript grammar, function, intent, or meaning."
   },
   "coordinate_system": {
@@ -97,10 +97,17 @@
       "validation_decision": "accept",
       "geometry": {
         "shape": "point",
-        "pixel": [855, 1075],
-        "normalized": [0.585616, 0.5375]
+        "pixel": [875, 1082],
+        "normalized": [0.599315, 0.541]
       },
-      "selection_note": "Validated operational central bifurcation point in the Y/stub structure within the canopy opening."
+      "selection_note": "Corrected and accepted central Y-like botanical junction point.",
+      "binding_correction": {
+        "defect_id": "VD-001",
+        "stage_a_candidate": "Y1",
+        "supersedes_binding_version": "0.2.1",
+        "previous_pixel": [855, 1075],
+        "previous_normalized": [0.585616, 0.5375]
+      }
     },
     {
       "entity_id": "VM.f2v.upper_stem_axis",
@@ -110,10 +117,59 @@
       "validation_decision": "accept",
       "geometry": {
         "shape": "segment",
-        "pixel": [[900, 1500], [862, 1120]],
-        "normalized": [[0.616438, 0.75], [0.590411, 0.56]]
+        "pixel": [[960, 1500], [875, 1120]],
+        "normalized": [[0.657534, 0.75], [0.599315, 0.56]]
       },
-      "selection_note": "Validated operational upper section of the long stem approaching the Y/stub structure."
+      "selection_note": "Corrected and accepted upper/middle main-stem section.",
+      "binding_correction": {
+        "defect_id": "VD-001",
+        "stage_a_candidate": "S1",
+        "supersedes_binding_version": "0.2.1",
+        "previous_pixel": [[900, 1500], [862, 1120]],
+        "previous_normalized": [[0.616438, 0.75], [0.590411, 0.56]]
+      }
+    },
+    {
+      "entity_id": "VM.f2v.main_stem_lower_section",
+      "primitive_type": "STEM",
+      "source_ref": "VM.f2v",
+      "annotation_status": "human_validated",
+      "validation_decision": "accept",
+      "geometry": {
+        "shape": "segment",
+        "pixel": [[975, 1790], [975, 1515]],
+        "normalized": [[0.667808, 0.895], [0.667808, 0.7575]]
+      },
+      "selection_note": "Accepted Stage A lower main-stem straight section.",
+      "stage_a_candidate": "S2"
+    },
+    {
+      "entity_id": "VM.f2v.flower_stalk_axis",
+      "primitive_type": "STEM",
+      "source_ref": "VM.f2v",
+      "annotation_status": "human_validated",
+      "validation_decision": "accept",
+      "geometry": {
+        "shape": "segment",
+        "pixel": [[1010, 560], [1030, 435]],
+        "normalized": [[0.691781, 0.28], [0.705479, 0.2175]]
+      },
+      "selection_note": "Accepted Stage A independent flower-stalk axis.",
+      "stage_a_candidate": "S3"
+    },
+    {
+      "entity_id": "VM.f2v.side_leaf_junction_y",
+      "primitive_type": "Y",
+      "source_ref": "VM.f2v",
+      "annotation_status": "human_validated",
+      "validation_decision": "accept",
+      "geometry": {
+        "shape": "point",
+        "pixel": [950, 1410],
+        "normalized": [0.650685, 0.705]
+      },
+      "selection_note": "Accepted Stage A side-leaf/main-stem botanical fork.",
+      "stage_a_candidate": "Y2"
     },
     {
       "entity_id": "VM.f3r.root_crown",
