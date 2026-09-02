@@ -1,0 +1,170 @@
+{
+  "experiment_id": "EX-GRAMMAR-002A",
+  "stage": "B_complete_opportunity_matrix",
+  "status": "completed",
+  "source": {
+    "height_px": 2000,
+    "image_id": "1006079",
+    "sha256": "df73d9f9e37285ea5d3e8627dd71a81854bf0ecc84362b8a059316e26b49215a",
+    "source_ref": "VM.f2v",
+    "width_px": 1460
+  },
+  "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7",
+  "transform_policy": "identity_only",
+  "tolerance": 0.03,
+  "eligible_stem_count": 3,
+  "eligible_y_count": 2,
+  "opportunity_count": 6,
+  "complete_opportunity_table": [
+    {
+      "actor_id": "S1",
+      "actor_entity_id": "VM.f2v.main_stem_upper_section",
+      "target_id": "Y1",
+      "target_entity_id": "VM.f2v.central_y_stage_a",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 1.470191462,
+      "target_distance": 0.005566443,
+      "tolerance": 0.03,
+      "qualifies_distance": true,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    },
+    {
+      "actor_id": "S1",
+      "actor_entity_id": "VM.f2v.main_stem_upper_section",
+      "target_id": "Y2",
+      "target_entity_id": "VM.f2v.side_leaf_junction_y",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 8.381888826,
+      "target_distance": 0.006635206,
+      "tolerance": 0.03,
+      "qualifies_distance": true,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    },
+    {
+      "actor_id": "S2",
+      "actor_entity_id": "VM.f2v.main_stem_lower_section",
+      "target_id": "Y1",
+      "target_entity_id": "VM.f2v.central_y_stage_a",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 10.950454279,
+      "target_distance": 0.068493,
+      "tolerance": 0.03,
+      "qualifies_distance": false,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    },
+    {
+      "actor_id": "S2",
+      "actor_entity_id": "VM.f2v.main_stem_lower_section",
+      "target_id": "Y2",
+      "target_entity_id": "VM.f2v.side_leaf_junction_y",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 5.14964456,
+      "target_distance": 0.017123,
+      "tolerance": 0.03,
+      "qualifies_distance": true,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    },
+    {
+      "actor_id": "S3",
+      "actor_entity_id": "VM.f2v.flower_stalk_axis",
+      "target_id": "Y1",
+      "target_entity_id": "VM.f2v.central_y_stage_a",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 172.853933779,
+      "target_distance": 0.276895217,
+      "tolerance": 0.03,
+      "qualifies_distance": false,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    },
+    {
+      "actor_id": "S3",
+      "actor_entity_id": "VM.f2v.flower_stalk_axis",
+      "target_id": "Y2",
+      "target_entity_id": "VM.f2v.side_leaf_junction_y",
+      "source_ref": "VM.f2v",
+      "transform": "identity",
+      "angular_deviation_deg": 173.161187013,
+      "target_distance": 0.426982296,
+      "tolerance": 0.03,
+      "qualifies_distance": false,
+      "method": "grammar/kernel/gk-m1/measurement/geometry.py::measure_point",
+      "candidate_inventory_sha256": "735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7"
+    }
+  ],
+  "per_stem_summary": [
+    {
+      "actor_id": "S1",
+      "nearest_target_id": "Y1",
+      "second_nearest_target_id": "Y2",
+      "minimum_target_distance": 0.005566443,
+      "angular_deviation_to_nearest_y_deg": 1.470191462,
+      "qualifying_y_count": 2,
+      "qualifying_y_fraction": 1.0
+    },
+    {
+      "actor_id": "S2",
+      "nearest_target_id": "Y2",
+      "second_nearest_target_id": "Y1",
+      "minimum_target_distance": 0.017123,
+      "angular_deviation_to_nearest_y_deg": 5.14964456,
+      "qualifying_y_count": 1,
+      "qualifying_y_fraction": 0.5
+    },
+    {
+      "actor_id": "S3",
+      "nearest_target_id": "Y1",
+      "second_nearest_target_id": "Y2",
+      "minimum_target_distance": 0.276895217,
+      "angular_deviation_to_nearest_y_deg": 172.853933779,
+      "qualifying_y_count": 0,
+      "qualifying_y_fraction": 0.0
+    }
+  ],
+  "descriptive_statistics": {
+    "target_distance": {
+      "minimum": 0.005566443,
+      "median": 0.042808,
+      "mean": 0.13361586,
+      "maximum": 0.426982296
+    },
+    "angular_deviation_deg": {
+      "minimum": 1.470191462,
+      "median": 9.666171552,
+      "mean": 61.994549986,
+      "maximum": 173.161187013
+    },
+    "angular_deviation_values_sorted": [
+      1.470191462,
+      5.14964456,
+      8.381888826,
+      10.950454279,
+      172.853933779,
+      173.161187013
+    ],
+    "qualifying_opportunity_count": 3,
+    "qualifying_opportunity_fraction": 0.5
+  },
+  "index_case": {
+    "actor_id": "S1",
+    "target_id": "Y1",
+    "target_distance": 0.005566443,
+    "angular_deviation_deg": 1.470191462,
+    "distance_rank_all_opportunities": 1,
+    "distance_percentile_less_than_or_equal": 16.666666667,
+    "rank_among_targets_for_own_stem": 1,
+    "difference_from_other_y_for_same_stem": 0.001068763,
+    "qualifies_distance": true,
+    "historical_comparison_note": "Corrected comparison only; does not restore the invalidated original EX-GRAMMAR-001 result."
+  },
+  "epistemic_boundary": "Within-folio descriptive geometry only; no grammar, intentionality, function, meaning, or cross-folio inference is established."
+}
