@@ -4,6 +4,7 @@ import http.client
 import json
 from pathlib import Path
 import sqlite3
+from contextlib import closing
 import tempfile
 import threading
 import unittest
@@ -115,13 +116,13 @@ class BrowserTests(unittest.TestCase):
 
     def test_corrupt_original_and_summary_block_export(self):
         record = self.put(wxr_fixture())
-        with sqlite3.connect(self.index) as db:
+        with closing(sqlite3.connect(self.index)) as db, db:
             db.execute("UPDATE records SET summary='{}'")
         target = self.root / "out.json"
         code, data, _ = self.request("/api/export", {"id": record["id"], "path": str(target)})
         self.assertEqual(code, 422)
         self.assertIn("summary", data["error"])
-        with sqlite3.connect(self.index) as db:
+        with closing(sqlite3.connect(self.index)) as db, db:
             db.execute("UPDATE records SET original=?", (b"{}",))
         self.assertEqual(self.request("/api/export", {"id": record["id"], "path": str(target)})[0], 422)
         self.assertFalse(target.exists())
@@ -149,7 +150,7 @@ class BrowserTests(unittest.TestCase):
 
     def test_locked_index_reports_busy(self):
         self.put(wxr_fixture())
-        with sqlite3.connect(self.index) as db:
+        with closing(sqlite3.connect(self.index)) as db, db:
             db.execute("BEGIN EXCLUSIVE")
             code, data, _ = self.request("/api/records")
             self.assertEqual(code, 422)

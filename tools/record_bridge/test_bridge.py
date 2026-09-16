@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 import sqlite3
+from contextlib import closing
 import subprocess
 import sys
 import tempfile
@@ -112,7 +113,7 @@ class BridgeTests(unittest.TestCase):
 
     def test_verify_detects_summary_corruption(self):
         result = self.put(wxr_fixture())
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db, db:
             db.execute("UPDATE records SET summary=? WHERE id=?", ('{}', result["id"]))
         self.assertFalse(store.verify(self.db)["ok"])
 
@@ -150,7 +151,7 @@ class BridgeTests(unittest.TestCase):
 
     def test_failed_transaction_rolls_back_record_and_session_link(self):
         self.put(wxr_fixture())
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db, db:
             db.execute("CREATE TRIGGER deny_link BEFORE INSERT ON session_links BEGIN SELECT RAISE(ABORT, 'injected failure'); END")
         with self.assertRaises(sqlite3.IntegrityError):
             self.put(stem_fixture(), session="SEARCH-test")
@@ -159,7 +160,7 @@ class BridgeTests(unittest.TestCase):
 
     def test_corrupt_original_blocks_export(self):
         r = self.put(wxr_fixture())
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db, db:
             db.execute("UPDATE records SET original=? WHERE id=?", (b'{}', r["id"]))
         self.assertFalse(store.verify(self.db)["ok"])
         with self.assertRaisesRegex(ValueError, "checksum"):
@@ -179,7 +180,7 @@ class BridgeTests(unittest.TestCase):
         self.assertFalse(self.db.exists())
 
     def test_unrelated_database_is_not_modified(self):
-        with sqlite3.connect(self.db) as db:
+        with closing(sqlite3.connect(self.db)) as db, db:
             db.execute("CREATE TABLE unrelated (x)")
         before = self.db.read_bytes()
         with self.assertRaisesRegex(ValueError, "schema"):
