@@ -14,8 +14,11 @@ It is an inspection utility, not a replacement for the existing instruments.
 6. Quit, reopen the launcher, and list the records again. They should remain present.
 
 No package installation, server, browser, network connection, audio, or manuscript images are needed.
-The Windows launcher is supplied for target-machine trial; Windows execution has not been verified here.
-The core and subprocess workflow are tested on Linux with Python.
+The operator supplied successful Windows startup, record-listing and integrity-check output
+from The Forge on 16 September 2026. Both supported record types have matching synced
+original/export content hashes. See [VALIDATION.md](VALIDATION.md) for evidence sources,
+build-identity qualifications and remaining review. The core and subprocess workflow were
+also tested on Linux with Python.
 
 The default index is `%LOCALAPPDATA%\VOXIS\RecordBridge\index.sqlite` on Windows,
 or `~/.local/share/VOXIS/RecordBridge/index.sqlite` when LOCALAPPDATA is absent.
@@ -100,10 +103,17 @@ explicit session links, malformed records, unsupported versions, historical inva
 transaction rollback, corrupted originals, no-overwrite export, size limits, unrelated databases,
 read-only operations and reopening from fresh processes.
 
-Before integrating into Workbench Home, trial one real export from each instrument on The Forge,
-quit/reopen the bridge, and compare the exported originals. WXR-003 file import and cross-instrument
-replay are not implemented here. Resonance checkpoint repair, the unresolved Alignment v2 source,
-shared image equivalence, user-reported Stem Lab bugs, and interface consolidation remain separate tasks.
+The scoped Forge record-handling trial is documented in [VALIDATION.md](VALIDATION.md):
+two user-supplied native captures were listed, index integrity passed, and original/export
+content hashes matched for both formats. Relaunch persistence is supported by the operator's
+follow-up output; it was not remotely observed. The synced implementation matches the
+identified candidate, but local Windows file hashes were not independently collected.
+Human review remains pending before merge. Workbench Home integration and the proposed
+Record Browser require their own implementation and acceptance checks.
+
+Import back into the WXR-003 instrument and cross-instrument replay are not implemented
+here. Resonance checkpoint repair, the unresolved Alignment v2 source, shared image
+equivalence and user-reported Stem Lab bugs remain separate tasks.
 
 ## Sources and implementation identity
 
