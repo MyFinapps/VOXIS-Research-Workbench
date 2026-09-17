@@ -76,24 +76,43 @@ read-only access, missing/empty/locked/corrupt indexes, corrupted originals and
 summaries, preserved invalid/unsupported/invalidated records, session protection,
 fixed asset serving and reopening the index. Tests use disposable synthetic data.
 
-Automated/Linux results do not certify the Windows launcher or Forge usability.
-The target-machine acceptance gate remains open until the operator completes the
-visual launch → browse → inspect → export → close/reopen journey and records the
-candidate identity, index, results and any defects. Corruption scenarios must use
-disposable fixtures, never the live index. Public evidence must omit private
-captures, absolute user paths and session tokens.
+## Scoped Forge acceptance — 2026-09-17
 
-## Acceptance mapping
+The operator completed scoped acceptance using candidate
+`97bbccb3eec4d15b08205d7a07115fdd14497feb`. GitHub PR #7 and the existing
+[Forge acceptance task](https://app.clickup.com/t/86bc1v95f) record the evidence.
 
-| Checklist area | Candidate behavior | Remaining device gate |
-| --- | --- | --- |
-| RB-01 / RB-12 | Windows launcher, local UI, keyboard controls | Forge launch and usability |
-| RB-02 / RB-03 / RB-04 | List, details, provenance and evidence distinctions | Confirm against Forge index |
-| RB-05 | Distinct retained states; native content is inert text | Isolated fixture review |
-| RB-06 / RB-07 | Byte-preserving exclusive export; cancel/error states | Forge visual export and permissions |
-| RB-08 / RB-09 | Read-only reopen, missing and empty handling | Forge close/reopen |
-| RB-10 | Busy/corrupt errors; unsafe export blocked | Disposable fixtures only |
-| RB-11 | Existing content identity and associations reused | No Browser import introduced |
+| Area | Evidence and scope |
+| --- | --- |
+| Launch, browse, inspect, search/filter | Operator-reported Forge behavior and screenshots for Stem Lab and WXR |
+| Original export | Both supplied exports independently matched previously recorded original SHA-256 identities |
+| Overwrite and invalid destination | Operator-reported refusal; automated regression coverage |
+| Restart persistence | Operator-reported relaunch and preserved records |
+| Missing and empty indexes | Isolated-helper operator observations; helper measured unchanged test indexes and clean exits |
+| Candidate identity | Operator-supplied BUILD.json and helper report; helper reported all 15 packaged files verified |
+| Busy/corrupt/adversarial cases | Automated coverage only; no Forge manual acceptance claimed |
+
+This is software acceptance, not validation of geometry or meaning. The assistant
+did not remotely execute the Forge run. Delivery review and merge remain separate.
+The delivery-preparation changes update documentation and packaging only; runtime
+files remain byte-identical to the accepted candidate. The accepted candidate ID
+is retained even when a later documentation/package commit becomes the PR head.
+
+## Reproducible packaging
+
+From a Git checkout with Git available, run:
+
+```text
+python tools/record_bridge/package_browser.py /new/output.zip --source-ref FULL_COMMIT_SHA
+```
+
+The packager resolves the commit and checks every bundled source file against its
+Git blob before creating an archive. Dirty files, mismatched commits, or checkout
+line-ending conversion fail closed. Use a checkout preserving committed bytes
+(e.g. core.autocrlf=false). The archive uses exclusive creation and deterministic
+entries, records the resolved source commit, and hashes its bundled contents.
+Packaging does not confer device acceptance. Git is needed only to build a ZIP,
+not to run the extracted Browser or Bridge.
 
 ## Dependency
 
