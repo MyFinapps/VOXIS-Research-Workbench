@@ -41,7 +41,7 @@ class HomeTests(unittest.TestCase):
         self.entry('stem',p)
         second=LaunchRegistry(self.config)
         self.assertEqual(second.data,self.registry.data)
-        self.assertEqual(second.launch('stem')['url'],p.as_uri())
+        self.assertEqual(second.launch('stem')['url'],p.resolve().as_uri())
         p.write_text('changed')
         with self.assertRaisesRegex(ValueError,'changed'):
             second.launch('stem')
@@ -129,10 +129,24 @@ class HomeTests(unittest.TestCase):
             # Path uses host-native implementation already chosen by pathlib.
             with patch('launcher.Path',type(p)):
                 cmd=command_for('resonance',e)
-                self.assertIn('/d /s /c',cmd);self.assertIn(str(p),cmd)
+                self.assertIn('/d /s /c',cmd);self.assertIn(str(p.resolve()),cmd)
         p=self._script('bad&name.cmd','@echo off')
         with self.assertRaisesRegex(ValueError,'metacharacters'):
             validate_entry('resonance',{'target':str(p)})
+
+    @unittest.skipUnless(os.name == 'nt', 'Native Windows batch invocation')
+    def test_windows_batch_launcher_in_path_with_spaces(self):
+        folder=self.root/'instrument folder';folder.mkdir()
+        script=folder/'start instrument.cmd'
+        script.write_text('@echo off\necho started>launch-marker.txt\n')
+        self.entry('resonance',script)
+        self.registry.launch('resonance')
+        process=self.registry.processes['resonance']
+        try:
+            self.assertEqual(process.wait(timeout=10),0)
+            self.assertEqual((folder/'launch-marker.txt').read_text().strip(),'started')
+        finally:
+            if process.poll() is None:process.terminate();process.wait(timeout=5)
 
     def test_browser_launch_real_handoff_export_and_shutdown_preserve_index(self):
         # Copy the unchanged Browser into a path containing spaces; no real user index.

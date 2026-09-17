@@ -33,7 +33,7 @@ function render(){
  }
  $('config-path').textContent=state.config_path;
 }
-async function refresh(){if(closed||busy)return;try{state=await api('/api/state');render();}catch(e){notify(e.message,true);}}
+async function refresh(){if(closed||busy)return;try{const next=await api('/api/state');if(JSON.stringify(next)!==JSON.stringify(state)){state=next;render();}}catch(e){notify(e.message,true);}}
 function configureEntry(row){editing=row;$('config-title').textContent='Configure '+row.title;$('target').value=row.target;$('version').value=row.version;
  const help={browser:'Paste the full path to Start-Record-Browser.cmd or browser.py in the existing Browser folder.',bridge:'Paste the full path to Start-Record-Bridge.cmd or bridge.py in the existing Bridge folder.',stem:'Paste the full path to the existing Stem Lab HTML file.',wxr:'Paste the confirmed HTTPS address of WXR-003. Home does not verify its deployed build or Quest behavior.',resonance:'Paste the full path to the existing launcher (.py, .exe, .cmd, .bat or .ps1). Do not guess a location.'};
  $('config-help').textContent=help[row.id];$('entry-hash').textContent=row.sha256||'Not measured';$('verification').textContent=row.verification;$('config-error').hidden=true;
@@ -45,7 +45,7 @@ async function openInstrument(row){
  busy=true;render();notify('Opening '+row.title+'…');
  try{const result=await api('/api/launch',{id:row.id});if(result.url&&tab){tab.location.href=result.url;}else if(tab){tab.close();}notify(result.message,false,result.url);}
  catch(e){if(tab)tab.close();notify(e.message,true);}
- finally{busy=false;await refresh();}
+ finally{busy=false;render();await refresh();}
 }
 $('config-form').onsubmit=async e=>{e.preventDefault();$('save-config').disabled=true;$('config-error').hidden=true;
  try{await api('/api/configure',{id:editing.id,entry:{target:$('target').value,version:$('version').value}});$('config-dialog').close();notify(editing.title+' location saved.');await refresh();}

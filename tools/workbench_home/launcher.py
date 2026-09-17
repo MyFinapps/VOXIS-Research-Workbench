@@ -62,6 +62,7 @@ def validate_entry(key, data):
     allowed = {'.html', '.htm'} if key == 'stem' else {'.py'} if key in ('browser', 'bridge') else {'.py', '.exe', '.cmd', '.bat', '.ps1'}
     if p.suffix.lower() not in allowed or not p.is_file():
         raise ValueError('That instrument file is missing or has an unsupported extension.')
+    p = p.resolve()
     if key == 'resonance' and p.suffix.lower() in ('.cmd', '.bat') and re.search(r'[&|<>^%!"\r\n]', str(p)):
         raise ValueError('Batch launcher paths cannot contain shell metacharacters. Use a path without them.')
     return {'target': str(p.resolve()), 'version': version, 'sha256': file_hash(p)}
@@ -73,9 +74,6 @@ class ConfigLock:
         path.parent.mkdir(parents=True, exist_ok=True)
         self.handle = path.with_suffix('.lock').open('a+b')
         self.handle.seek(0)
-        if not self.handle.read(1):
-            self.handle.write(b'0'); self.handle.flush()
-        self.handle.seek(0)
         try:
             if os.name == 'nt':
                 import msvcrt
@@ -83,6 +81,8 @@ class ConfigLock:
             else:
                 import fcntl
                 fcntl.flock(self.handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            if os.fstat(self.handle.fileno()).st_size == 0:
+                self.handle.write(b'0'); self.handle.flush()
         except OSError:
             self.handle.close()
             raise ValueError('Home is already open for this configuration. Return to that window or close it first.') from None
