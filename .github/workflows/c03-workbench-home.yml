@@ -1,0 +1,26 @@
+name: C03 workbench home
+on:
+  push:
+    paths: ['tools/workbench_home/**', 'tools/record_bridge/**', '.github/workflows/c03-workbench-home.yml']
+  pull_request:
+    paths: ['tools/workbench_home/**', 'tools/record_bridge/**', '.github/workflows/c03-workbench-home.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.10'
+          - os: ubuntu-latest
+            python: '3.13'
+          - os: windows-latest
+            python: '3.13'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python }}'
+      - run: python -m unittest discover -s tools/workbench_home -v
