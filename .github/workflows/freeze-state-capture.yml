@@ -1,0 +1,40 @@
+name: FREEZE state-capture tests
+
+on:
+  push:
+    paths:
+      - 'workbench/freeze/**'
+      - 'schemas/records/freeze_record.schema.json'
+      - 'docs/design/FREEZE_STATE_CAPTURE*.md'
+      - '.github/workflows/freeze-state-capture.yml'
+  pull_request:
+    paths:
+      - 'workbench/freeze/**'
+      - 'schemas/records/freeze_record.schema.json'
+      - 'docs/design/FREEZE_STATE_CAPTURE*.md'
+      - '.github/workflows/freeze-state-capture.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-state-capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run FREEZE deterministic tests
+        run: python workbench/freeze/tests/test_record.py
+      - name: Run desktop FREEZE adapter tests
+        run: python workbench/freeze/desktop_poc/test_adapter.py
+      - name: Parse FREEZE JSON schema
+        run: python -m json.tool schemas/records/freeze_record.schema.json > /dev/null
+      - name: Verify finalized GK-M1 remains untouched
+        shell: bash
+        run: |
+          cd grammar/kernel/gk-m1
+          sha256sum -c MANIFEST.sha256
