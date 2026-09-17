@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>VOXIS · Record Browser</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header class="brand"><strong>VOXIS</strong><span>Record Browser</span></header>
+<main>
+  <section class="heading"><div><h1>Your records</h1><p>Preserved originals. Clear provenance.</p></div><div class="actions"><button id="index-info">Index details</button><button id="stop" class="primary">Stop Browser</button></div></section>
+  <p id="message" class="message" role="status" hidden></p>
+  <div class="workspace">
+    <aside aria-label="Record list">
+      <div class="filters"><input id="search" type="search" aria-label="Search records" placeholder="Search records"><select id="format" aria-label="Filter by format"><option value="">All formats</option><option value="voxis.stem-session/1">Stem Lab</option><option value="VOXIS.configuration-export.v1">WXR-003</option><option value="other">Other</option></select><button id="refresh" class="primary">Refresh</button></div>
+      <div id="records" class="records"></div><p id="count" class="count" aria-live="polite">Loading records…</p>
+    </aside>
+    <section class="inspector" aria-label="Record inspector">
+      <div id="placeholder" class="placeholder"><h2>Select a record</h2><p>Inspect its contents and provenance, or export the preserved original.</p></div>
+      <div id="detail" hidden>
+        <div class="detail-heading"><div><h2 id="record-name"></h2><p id="record-meta"></p></div><button id="export" class="primary">Export original</button></div>
+        <div class="tabs" role="tablist" aria-label="Record views"><button id="overview-tab" role="tab" aria-selected="true" aria-controls="overview" tabindex="0">Overview</button><button id="native-tab" role="tab" aria-selected="false" aria-controls="native" tabindex="-1">Native content</button></div>
+        <section id="overview" role="tabpanel" aria-labelledby="overview-tab"><dl id="facts"></dl><p id="boundary" class="notice"></p><ul id="warnings" class="warnings"></ul><details><summary>Stored summary</summary><pre id="summary"></pre></details></section>
+        <section id="native" role="tabpanel" aria-labelledby="native-tab" hidden><p id="encoding" class="muted"></p><pre id="native-text" tabindex="0"></pre></section>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>Local index · Read-only browsing</footer>
+<dialog id="info-dialog" aria-labelledby="info-title"><h2 id="info-title">Index details</h2><p>Record Browser <span id="version"></span></p><label for="index-path">Active index</label><input id="index-path" readonly><p class="muted">Records stay on this computer. Browsing never imports, edits or deletes records.</p><div class="dialog-actions"><button id="close-info" class="primary">Close</button></div></dialog>
+<dialog id="export-dialog" aria-labelledby="export-title"><h2 id="export-title">Export original</h2><p>Save the exact original bytes to a new JSON file.</p><form id="export-form"><label for="destination">Full destination path</label><input id="destination" required autocomplete="off" spellcheck="false"><p class="muted">Use an existing folder and a new filename ending in .json. Existing files cannot be overwritten.</p><p id="export-error" class="error" role="alert" hidden></p><div class="dialog-actions"><button type="button" id="cancel-export">Cancel</button><button type="submit" id="save-export" class="primary">Save original</button></div></form></dialog>
+<dialog id="stop-dialog" aria-labelledby="stop-title"><h2 id="stop-title">Stop Record Browser?</h2><p>Your records remain in the local index. Relaunch to browse again.</p><div class="dialog-actions"><button id="cancel-stop">Keep browsing</button><button id="confirm-stop" class="primary">Stop session</button></div></dialog>
+</body></html>
