@@ -36,7 +36,8 @@ def load_binding():
 def test_binding_status_boundary():
     payload = load_binding()
     assert payload["status"] == "human_validated"
-    assert payload["validation"]["decision"] == "all_seven_approved"
+    assert payload["version"] == "0.2.2"
+    assert payload["validation"]["decision"] == "stage_a_f2v_corrections_and_inventory_accepted"
     for entity in payload["entities"]:
         assert entity["annotation_status"] == "human_validated"
         assert entity["validation_decision"] == "accept"

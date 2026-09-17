@@ -1,0 +1,1 @@
+d483018f3c196ad7945e9fdcc4bc35e89bb13b428ab35895d6bb2d1e06a84a13  candidate_inventory.proposed.json

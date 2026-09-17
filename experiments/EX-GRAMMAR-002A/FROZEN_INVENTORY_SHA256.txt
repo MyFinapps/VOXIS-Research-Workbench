@@ -1,0 +1,1 @@
+735d9a58ab0305048617ffa20d99c2f86826e5863f7f0355eacd476740d810d7  candidate_inventory.frozen.json

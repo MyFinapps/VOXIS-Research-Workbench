@@ -1,0 +1,119 @@
+{
+  "candidates": {
+    "STEM": [
+      {
+        "entity_id": "VM.f2v.main_stem_upper_section",
+        "geometry": {
+          "normalized": [[0.657534, 0.75], [0.599315, 0.56]],
+          "pixel": [[960, 1500], [875, 1120]],
+          "shape": "segment"
+        },
+        "id": "S1",
+        "note": "Corrected upper/middle main-stem section; proposed replacement for prior offset upper_stem_axis.",
+        "pixel": [[960, 1500], [875, 1120]],
+        "primitive_type": "STEM",
+        "review_status": "accepted"
+      },
+      {
+        "entity_id": "VM.f2v.main_stem_lower_section",
+        "geometry": {
+          "normalized": [[0.667808, 0.895], [0.667808, 0.7575]],
+          "pixel": [[975, 1790], [975, 1515]],
+          "shape": "segment"
+        },
+        "id": "S2",
+        "note": "Lower main-stem straight section from ground-band emergence toward the upper bend.",
+        "pixel": [[975, 1790], [975, 1515]],
+        "primitive_type": "STEM",
+        "review_status": "accepted"
+      },
+      {
+        "entity_id": "VM.f2v.flower_stalk_axis",
+        "geometry": {
+          "normalized": [[0.691781, 0.28], [0.705479, 0.2175]],
+          "pixel": [[1010, 560], [1030, 435]],
+          "shape": "segment"
+        },
+        "id": "S3",
+        "note": "Independent flower stalk above the large green field.",
+        "pixel": [[1010, 560], [1030, 435]],
+        "primitive_type": "STEM",
+        "review_status": "accepted"
+      }
+    ],
+    "Y": [
+      {
+        "entity_id": "VM.f2v.central_y_stage_a",
+        "geometry": {
+          "normalized": [0.599315, 0.541],
+          "pixel": [875, 1082],
+          "shape": "point"
+        },
+        "id": "Y1",
+        "note": "Corrected central Y-like junction point; proposed replacement for prior offset central_y.",
+        "pixel": [875, 1082],
+        "primitive_type": "Y",
+        "review_status": "accepted"
+      },
+      {
+        "entity_id": "VM.f2v.side_leaf_junction_y",
+        "geometry": {
+          "normalized": [0.650685, 0.705],
+          "pixel": [950, 1410],
+          "shape": "point"
+        },
+        "id": "Y2",
+        "note": "Visible side-leaf/main-stem fork; accepted by human eligibility review.",
+        "pixel": [950, 1410],
+        "primitive_type": "Y",
+        "review_status": "accepted"
+      }
+    ]
+  },
+  "exclusions": [
+    {"id": "X1", "kind": "Y", "pixel": [1030, 420], "reason": "Multi-lobed flower/calyx transition; not a clear Y-like branch junction.", "review_status": "accepted_exclusion"},
+    {"id": "X2", "kind": "Y", "pixel": [1080, 195], "reason": "Petal/flower-outline V; not a botanical branch junction.", "review_status": "accepted_exclusion"},
+    {"id": "X3", "kind": "STEM", "pixel": [982, 1355], "reason": "Short side leaf/spur; leaf-like appendage rather than an elongated stem actor.", "review_status": "accepted_exclusion"},
+    {"id": "X4", "kind": "STEM", "pixel": [520, 820], "reason": "Faint background/bleed-through region; excluded as uncertain non-current-folio botanical structure.", "review_status": "accepted_exclusion"}
+  ],
+  "experiment_id": "EX-GRAMMAR-002A",
+  "information_control": {
+    "angles_shown": false,
+    "distances_shown": false,
+    "pairwise_guides_shown": false,
+    "rankings_shown": false,
+    "tolerance_pass_fail_shown": false
+  },
+  "pairwise_measurements_run_at_freeze": false,
+  "prior_binding_audit": [
+    {
+      "entity_id": "VM.f2v.upper_stem_axis",
+      "historical_status": "human_validated",
+      "reason": "stored segment is visibly offset left of the green stem; S1 is the accepted replacement geometry",
+      "stage_a_outcome": "adjust"
+    },
+    {
+      "entity_id": "VM.f2v.central_y",
+      "historical_status": "human_validated",
+      "reason": "stored point is visibly offset into adjacent negative space; Y1 is the accepted replacement geometry",
+      "stage_a_outcome": "adjust"
+    }
+  ],
+  "review": {
+    "completed_at": "2026-09-02",
+    "decision": "all_candidates_and_exclusions_accepted",
+    "scope": "annotation_adequacy_and_eligibility_only",
+    "validator_role": "human_operator",
+    "geometry_changed": false,
+    "eligibility_changed": false
+  },
+  "source": {
+    "height_px": 2000,
+    "image_id": "1006079",
+    "sha256": "df73d9f9e37285ea5d3e8627dd71a81854bf0ecc84362b8a059316e26b49215a",
+    "source_ref": "VM.f2v",
+    "width_px": 1460
+  },
+  "stage": "A_candidate_inventory_reviewed",
+  "status": "reviewed_ready_to_freeze"
+}
