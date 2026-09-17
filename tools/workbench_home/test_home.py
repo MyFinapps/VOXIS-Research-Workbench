@@ -106,6 +106,44 @@ class HomeTests(unittest.TestCase):
         self.assertIn('(7)',row['error'])
         with self.assertRaises(ValueError):self.registry.launch('resonance')
 
+    def test_real_bridge_quit_reenables_open_and_can_relaunch(self):
+        self.entry('bridge', BRIDGE / 'Start-Record-Bridge.cmd')
+        spawn = subprocess.Popen
+        def with_input(*args, **kwargs):
+            kwargs.update(stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE, creationflags=0)
+            return spawn(*args, **kwargs)
+        with patch.dict(os.environ, {'LOCALAPPDATA': str(self.root / 'isolated')}), \
+                patch('launcher.subprocess.Popen', side_effect=with_input):
+            for _ in range(2):
+                self.registry.launch('bridge')
+                process = self.registry.processes['bridge']
+                try:
+                    with self.assertRaises(ValueError):
+                        self.registry.launch('bridge')
+                    output, errors = process.communicate(b'Q\n', timeout=5)
+                    self.assertEqual(process.returncode, 0, errors)
+                    self.assertIn(b'Q Quit', output)
+                finally:
+                    if process.poll() is None:
+                        process.kill(); process.communicate()
+                row = self.registry.snapshot()['instruments'][1]
+                self.assertEqual(row['state'], 'configured')
+                self.assertTrue(row['can_open'])
+                self.assertFalse(row['can_clear'])
+                self.assertEqual(row['error'], '')
+                self.assertNotIn('bridge', LaunchRegistry(self.config).data['pending'])
+        self.assertFalse((self.root / 'isolated').exists())
+
+    def test_bridge_failure_reports_exit_and_allows_retry(self):
+        self.entry('bridge', self._script('bridge.py', 'raise SystemExit(7)'))
+        self.registry.launch('bridge')
+        self.registry.processes['bridge'].wait(timeout=5)
+        row = self.registry.snapshot()['instruments'][1]
+        self.assertTrue(row['can_open'])
+        self.assertIn('Record Bridge exited (7)', row['error'])
+        self.assertNotIn('bridge', self.registry.data['pending'])
+
     def test_settings_backup_restore_uses_disposable_copy(self):
         self.entry('wxr','https://example.test/original')
         backup=self.root/'backup.json';backup.write_bytes(self.config.read_bytes())

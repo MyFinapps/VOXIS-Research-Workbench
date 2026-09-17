@@ -156,15 +156,17 @@ class LaunchRegistry:
             if code is None:
                 continue
             del self.processes[key]; self.urls.pop(key, None)
-            # A wrapper may leave child processes running even after it exits.
-            if key in ('bridge', 'resonance'):
+            # Resonance may be a wrapper that leaves child processes running.
+            # Bridge is launched directly as bridge.py; Q ends the owned process.
+            if key == 'resonance':
                 self.errors[key] = f'Launcher exited ({code}). Check the instrument before clearing its reminder.'
                 continue
             d = copy.deepcopy(self.data)
             if key in d['pending']:
                 d['pending'].remove(key); self.save(d)
+            self.errors.pop(key, None)
             if code:
-                self.errors[key] = f'Browser exited ({code}). Check its files and Python installation.'
+                self.errors[key] = f'{INSTRUMENTS[key][0]} exited ({code}). Check its files and Python installation.'
 
     def snapshot(self):
         with self.lock:

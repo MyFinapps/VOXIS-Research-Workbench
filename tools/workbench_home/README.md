@@ -61,13 +61,19 @@ does not create an instrument index. An OS lock file is created beside settings.
 - **Configured**: location saved; not a reachability or runtime claim.
 - **Running**: Home's launched process has not exited. Browser additionally passed
   an authenticated readiness check before Home offers its session.
-- **Check existing session**: after a Home restart/crash, or an exited wrapper,
+- **Check existing session**: after a Home restart/crash, or an exited Resonance wrapper,
   a launched instrument may still be running. Open cannot create another copy.
 - Close the instrument and its launcher first, then **Configure → I have closed
   the previous instrument session → Clear launch reminder**. This acknowledges
   your observation; Home does not kill a process or prove that children stopped.
 - Browser's own **Stop Browser** shuts down its server. A later Open creates a new
   session. Bridge and Resonance are stopped in their own windows.
+- Bridge **Q Quit** ends the directly launched process. Within the next Home
+  refresh (up to five seconds), Bridge returns to **Configured** with **Open**
+  enabled. No manual reminder clearing is needed while the same Home is running.
+  A nonzero Bridge exit also permits retry and displays its exit code.
+- When upgrading from the first candidate, clear any old Bridge reminder once
+  after confirming Bridge is closed; persisted reminders cannot prove an exit.
 - **Close Home** stops only Home. Closing its tab leaves Home running. Never kill
   processes by name/port as a recovery shortcut. External instrument processes
   started outside Home are not discovered or claimed as Home-owned.
