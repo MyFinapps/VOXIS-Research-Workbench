@@ -15,7 +15,7 @@ is not verification of the instrument or of manuscript geometry or meaning.
    in the launcher window. Do not share that address: it carries the session token.
 4. Choose **Configure** beside each instrument. Paste its confirmed location.
    Saving does not launch it. No source files, captures or indexes are moved.
-5. Choose **Open**. Browser opens its session in a new tab; **Return** reuses it.
+5. Choose **Open**. Browser opens its session in a new tab; **Return** focuses that same tab without reloading its selection or filters.
    If a popup is blocked, use **Open instrument session** in the message bar.
 
 | Instrument | Location to configure | Launch behavior |
@@ -137,3 +137,24 @@ Record the candidate commit from BUILD.json, device, date, operator and outcomes
 Native recall, cross-engine replay, FREEZE/VISTA acceptance, and manuscript research
 validation are outside this release. Existing Browser Forge acceptance at
 `97bbccb3eec4d15b08205d7a07115fdd14497feb` does not substitute for Home acceptance.
+
+## Browser tab lifecycle correction
+Return previously opened duplicate views of one server. Home now retains the
+Browser window handle and focuses it without navigating again. A stopped tab
+is reused when a new Browser server is launched. If the user closes the Browser
+tab while its server runs, Return opens a fresh view; the closed view's context
+cannot be recovered. If Home is reloaded, its window handle is lost: Return gives
+instructions to switch to the existing tab manually rather than creating a
+duplicate. Browser focus can be restricted by browser settings. Popup blocking
+gives an explicit retry message, not a link that spawns uncontrolled duplicates.
+
+Stop Browser stops the server for every view of that session. Close any leftover
+duplicate tabs created by an older Home build. Browser runtime is unchanged;
+such old tabs do not receive an automatic stopped-state broadcast. This update
+does not claim to fix whole-Home unresponsiveness if it occurs independently.
+
+Forge retest: select a record, enter a search and choose Native JSON; switch to
+Home and press Return twice. Tab count, selection, search and selected detail tab
+must remain unchanged. Stop Browser, return to Home, wait for Open, then reopen;
+verify records remain available. Separately check Home reload gives manual-tab
+guidance and closing the Browser tab gives a clearly fresh view on Return.

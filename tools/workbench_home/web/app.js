@@ -3,6 +3,7 @@ const $ = id => document.getElementById(id);
 const token = location.hash.slice(1) || sessionStorage.getItem('voxis-home-token') || '';
 if(location.hash){sessionStorage.setItem('voxis-home-token',token);history.replaceState(null,'','/');}
 let state, editing, busy=false, closed=false;
+let browserTab=null, browserURL=null, browserAttempted=false;
 const paths = {
  browser:'M7 3h15l7 7v27H7z M22 3v8h7 M12 17h12 M12 23h12 M12 29h12',
  bridge:'M3 12h29m-6-6 6 6-6 6 M32 28H3m6-6-6 6 6 6',
@@ -40,11 +41,33 @@ function configureEntry(row){editing=row;$('config-title').textContent='Configur
  $('reminder').hidden=!row.can_clear;$('closed-confirm').checked=false;$('save-config').disabled=['running','unconfirmed'].includes(row.state);$('target').disabled=$('save-config').disabled;$('version').disabled=$('save-config').disabled;
  $('config-dialog').showModal();$('target').focus();}
 async function openInstrument(row){
- // Browser/HTTPS sessions open from a user gesture; a fallback link survives popup blocking.
- let tab;if(['browser','wxr'].includes(row.id)){tab=window.open('about:blank','_blank');if(tab)tab.opener=null;}
+ if(busy)return;
+ // After a Home reload we cannot recover a WindowProxy safely. Never guess
+ // that opening another tab restores the existing view's selection/filter state.
+ if(row.id==='browser'&&row.state==='running'&&!browserTab&&!browserAttempted){
+  notify('Browser is already running. Switch to its existing tab. Home was reloaded and cannot focus that tab; no new tab was opened.');return;
+ }
+ let tab,created=false;
+ if(row.id==='browser'){
+  browserAttempted=true;
+  if(browserTab&&!browserTab.closed){tab=browserTab;tab.focus();}
+  else{tab=window.open('about:blank','_blank');created=!!tab;if(tab)tab.opener=null;}
+ }else if(row.id==='wxr'){tab=window.open('about:blank','_blank');created=!!tab;if(tab)tab.opener=null;}
  busy=true;render();notify('Opening '+row.title+'…');
- try{const result=await api('/api/launch',{id:row.id});if(result.url&&tab){tab.location.href=result.url;}else if(tab){tab.close();}notify(result.message,false,result.url);}
- catch(e){if(tab)tab.close();notify(e.message,true);}
+ try{
+  const result=await api('/api/launch',{id:row.id});
+  if(row.id==='browser'&&result.url){
+   if(tab){
+    // Focus only for an existing session: assigning its URL would reset context.
+    if(created||browserURL!==result.url)tab.location.href=result.url;
+    browserTab=tab;browserURL=result.url;
+    notify(created&&row.state==='running'?'Opened a fresh Browser view because its previous tab was closed or unavailable.': 'Browser tab ready. If your browser does not switch tabs automatically, select the Record Browser tab.');
+   }else notify('Popup blocked. Allow popups for Home, then click Return to open Browser.');
+  }else{
+   if(result.url&&tab)tab.location.href=result.url;else if(created)tab.close();
+   notify(result.message,false,result.url);
+  }
+ }catch(e){if(created&&tab)tab.close();notify(e.message,true);}
  finally{busy=false;render();await refresh();}
 }
 $('config-form').onsubmit=async e=>{e.preventDefault();$('save-config').disabled=true;$('config-error').hidden=true;
