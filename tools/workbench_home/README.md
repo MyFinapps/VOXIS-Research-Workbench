@@ -138,10 +138,10 @@ Native recall, cross-engine replay, FREEZE/VISTA acceptance, and manuscript rese
 validation are outside this release. Existing Browser Forge acceptance at
 `97bbccb3eec4d15b08205d7a07115fdd14497feb` does not substitute for Home acceptance.
 
-## Browser tab lifecycle correction
+## Browser tab lifecycle correction (revised after Forge restart failure)
 Return previously opened duplicate views of one server. Home now retains the
-Browser window handle and focuses it without navigating again. A stopped tab
-is reused when a new Browser server is launched. If the user closes the Browser
+Browser window handle and focuses it without navigating again. A new Browser server opens in a fresh tab; close its old stopped tab.
+Home never navigates an existing cross-origin tab to a different session. If the user closes the Browser
 tab while its server runs, Return opens a fresh view; the closed view's context
 cannot be recovered. If Home is reloaded, its window handle is lost: Return gives
 instructions to switch to the existing tab manually rather than creating a

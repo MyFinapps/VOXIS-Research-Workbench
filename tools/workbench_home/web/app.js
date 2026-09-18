@@ -50,7 +50,9 @@ async function openInstrument(row){
  let tab,created=false;
  if(row.id==='browser'){
   browserAttempted=true;
-  if(browserTab&&!browserTab.closed){tab=browserTab;tab.focus();}
+  // A stopped session's cross-origin tab cannot safely be navigated again.
+  if(row.state!=='running'){browserTab=null;browserURL=null;}
+  if(browserTab&&!browserTab.closed){tab=browserTab;try{tab.focus();}catch{/* Manual tab selection remains available. */}}
   else{tab=window.open('about:blank','_blank');created=!!tab;if(tab)tab.opener=null;}
  }else if(row.id==='wxr'){tab=window.open('about:blank','_blank');created=!!tab;if(tab)tab.opener=null;}
  busy=true;render();notify('Opening '+row.title+'…');
@@ -59,7 +61,11 @@ async function openInstrument(row){
   if(row.id==='browser'&&result.url){
    if(tab){
     // Focus only for an existing session: assigning its URL would reset context.
-    if(created||browserURL!==result.url)tab.location.href=result.url;
+    if(!created&&browserURL!==result.url){
+     browserTab=null;browserURL=null;
+     notify('Browser restarted. Click Return again to open its new session in a fresh tab; the old stopped tab can be closed.');return;
+    }
+    if(created)tab.location.href=result.url;
     browserTab=tab;browserURL=result.url;
     notify(created&&row.state==='running'?'Opened a fresh Browser view because its previous tab was closed or unavailable.': 'Browser tab ready. If your browser does not switch tabs automatically, select the Record Browser tab.');
    }else notify('Popup blocked. Allow popups for Home, then click Return to open Browser.');
@@ -67,7 +73,14 @@ async function openInstrument(row){
    if(result.url&&tab)tab.location.href=result.url;else if(created)tab.close();
    notify(result.message,false,result.url);
   }
- }catch(e){if(created&&tab)tab.close();notify(e.message,true);}
+ }catch(e){
+  if(created&&tab)tab.close();
+  if(row.id==='browser'){
+   if(created){browserTab=null;browserURL=null;}
+   // DOM navigation errors can embed the full token-bearing session URL.
+   notify('Browser could not be opened. Check Home status, allow popups, then retry Open or Return. If a Browser tab is already working, select it manually.',true);
+  }else notify(e.message,true);
+ }
  finally{busy=false;render();await refresh();}
 }
 $('config-form').onsubmit=async e=>{e.preventDefault();$('save-config').disabled=true;$('config-error').hidden=true;
