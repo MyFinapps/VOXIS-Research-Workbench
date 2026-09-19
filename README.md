@@ -14,6 +14,14 @@ This repository stores reproducible engineering artifacts: source code, schemas,
 
 It is **not** the master archive for heavyweight source evidence. High-resolution manuscript PDFs, raw photography, large videos, Blender assets, and other bulky research media remain in the external/local research archive and are referenced here by provenance records and hashes.
 
+## Unified Workbench direction
+
+The proposed [unified architecture](docs/UNIFIED_WORKBENCH_ARCHITECTURE.md) defines
+a common shell, context, data model and service ownership for the existing instruments.
+Its first [implementation slice](docs/STEM_V2_RECORD_SLICE.md) adds recognized Stem Lab
+v2 records while preserving original bytes. These are design specifications, not
+claims of deployed migration or completed native recall.
+
 ## Current baseline
 
 | Area | Baseline | Status |
