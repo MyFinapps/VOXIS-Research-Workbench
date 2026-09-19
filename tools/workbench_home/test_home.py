@@ -237,7 +237,7 @@ class HomeAPITests(unittest.TestCase):
             r=c.getresponse();return r.status,r.read()
         finally:c.close()
     def test_protected_routes_and_inert_fixed_assets(self):
-        for route in ['/api/state','/api/configure','/api/launch','/api/clear','/api/stop']:
+        for route in ['/api/state','/api/configure','/api/launch','/api/clear','/api/stop','/api/resonance/check']:
             body=None if route=='/api/state' else {}
             for h,auth in [({},False),({'Origin':'https://foreign.test'},True),({'Host':'foreign.test'},True),({'Sec-Fetch-Site':'cross-site'},True)]:
                 self.assertEqual(self.request(route,body,h,auth)[0],403)
@@ -249,6 +249,14 @@ class HomeAPITests(unittest.TestCase):
         self.assertEqual(self.request('/api/configure',{'id':'wxr','entry':{'target':'https://example.test/wxr'}})[0],200)
         code,data=self.request('/api/state');self.assertEqual(code,200)
         self.assertEqual(json.loads(data)['instruments'][3]['state'],'configured')
+    def test_resonance_check_does_not_launch_or_clear_reminders(self):
+        self.server.registry.data['pending'] = ['resonance']
+        before = json.dumps(self.server.registry.data, sort_keys=True)
+        with patch('home.check_session', return_value={'compatible': True}) as probe, patch('launcher.subprocess.Popen') as spawn:
+            self.assertEqual(self.request('/api/resonance/check', {'id':'resonance', 'port':3030})[0], 200)
+            probe.assert_called_once_with(3030); spawn.assert_not_called()
+        self.assertEqual(json.dumps(self.server.registry.data, sort_keys=True), before)
+        self.assertFalse((self.root/'home.json').exists())
     def test_port_conflict_is_actionable_and_releases_lock(self):
         with self.assertRaises(OSError):home.HomeServer(self.root/'other.json',self.server.server_port)
         other=home.HomeServer(self.root/'other.json');other.server_close()

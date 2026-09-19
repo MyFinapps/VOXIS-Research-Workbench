@@ -1,3 +1,30 @@
+## Existing Resonance service check (candidate)
+
+The Resonance row has a **Check existing session** action. Enter the local
+port from the Engine console (default 3030). This works even while a launch
+reminder is present. Home sends only GET /api/model to loopback, accepts a
+bounded JSON response matching the inspected model 0.2.0, and reports compatible,
+unrecognized, or unavailable. It does not open/refresh a tab, launch a process,
+clear a reminder, persist the model response, or claim a unique session identity.
+Switch to an already-open Resonance tab manually. Automatic tab adoption and
+independent experiment sessions are not implemented by this change.
+
+Upgrade: use Close Home (not Stop Browser or Ctrl-C in the Engine console),
+extract the updated ZIP into a new folder, and run its Home launcher. Keep the
+Resonance server and tab open. Existing saved locations are reused. On Home,
+click Check existing session, enter 3030, and confirm a compatibility message
+appears without new tabs, new consoles, or changes to the existing Engine view.
+Launch reminders intentionally remain until the instrument is actually closed.
+Do not clear reminders just to perform this read-only check.
+
+Validation: local Python suite 25 passed, one Windows-native skip; nine existing
+Browser tab contract tests passed. Real loopback fixtures cover compatibility,
+malformed/unrelated payloads, redirects, response bounds, bad ports and memory.
+Protected Home route tests confirm no process launch or configuration mutation.
+Cloud browser navigation to local Home was blocked with ERR_BLOCKED_BY_CLIENT;
+rendered layout and real Engine compatibility await Forge acceptance. No claim
+of full Home acceptance or research validity is made.
+
 # Workbench Home 0.1 — C03 candidate
 
 One local starting point for Record Browser, Record Bridge, Stem Lab, WXR-003 and

@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'record_bridge'))
 from browser import Handler as ProtectedHandler
 from launcher import ConfigLock, LaunchRegistry, default_config
+from resonance import check_session
 
 WEB = Path(__file__).with_name('web')
 ASSETS = {'/': ('index.html', 'text/html'), '/app.js': ('app.js', 'text/javascript'),
@@ -74,7 +75,11 @@ class Handler(ProtectedHandler):
             key = data.get('id')
             if not isinstance(key, str) and self.path != '/api/stop':
                 raise ValueError('Choose a listed instrument.')
-            if self.path == '/api/configure':
+            if self.path == '/api/resonance/check':
+                if key != 'resonance':
+                    raise ValueError('Choose Resonance Engine.')
+                result = check_session(data.get('port'))
+            elif self.path == '/api/configure':
                 result = self.server.registry.update(key, data.get('entry'))
             elif self.path == '/api/launch':
                 result = self.server.registry.launch(key)

@@ -29,6 +29,18 @@ function render(){
   const configure=document.createElement('button');configure.className='configure';configure.textContent='Configure';configure.setAttribute('aria-label','Configure '+row.title);configure.onclick=()=>configureEntry(row);configure.disabled=busy;
   const launch=document.createElement('button');launch.className='launch'+(row.can_open?' primary':'');launch.textContent=row.state==='running'&&row.id==='browser'?'Return':'Open';launch.setAttribute('aria-label',launch.textContent+' '+row.title);launch.disabled=!row.can_open||busy;launch.onclick=()=>openInstrument(row);
   item.append(icon(row.id),copy,status,configure,launch);
+  if(row.id==='resonance'){
+   const check=document.createElement('button');check.className='configure';check.textContent='Check existing session';check.disabled=busy;
+   check.onclick=async()=>{
+    const value=window.prompt('Resonance port shown in its server console:', '3030');
+    if(value===null)return;
+    if(!/^\d+$/.test(value)||Number(value)<1||Number(value)>65535){notify('Enter a port number from 1 to 65535.',true);return;}
+    busy=true;render();notify('Checking the existing Resonance service…');
+    try{const result=await api('/api/resonance/check',{id:'resonance',port:Number(value)});notify(result.message);}
+    catch(e){notify(e.message,true);}finally{busy=false;render();}
+   };
+   copy.append(check);
+  }
   if(row.error){const p=document.createElement('p');p.className='row-error';p.textContent=row.error;item.append(p);}
   $('rows').append(item);
  }

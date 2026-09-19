@@ -6,7 +6,7 @@ from pathlib import Path
 import subprocess
 import zipfile
 
-HOME_FILES = ['home.py','launcher.py','Start-Workbench-Home.cmd','README.md','test_home.py',
+HOME_FILES = ['home.py','launcher.py','resonance.py','test_resonance.py','Start-Workbench-Home.cmd','README.md','test_home.py',
               'web/index.html','web/app.js','web/style.css']
 BRIDGE_FILES = ['browser.py','bridge.py','store.py','adapters.py','Start-Record-Browser.cmd',
                 'Start-Record-Bridge.cmd','BROWSER_README.md','README.md','VALIDATION.md','test_bridge.py',
